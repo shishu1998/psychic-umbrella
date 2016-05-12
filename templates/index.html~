@@ -1,5 +1,0 @@
-{% extends "template.html" %} 
-{% block head %}
-<title>World Map</title>
-{% endblock %}
-
