@@ -7,6 +7,10 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route("/data")
+def data():
+    return render_template("data.html")
+
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"
     app.debug = True
