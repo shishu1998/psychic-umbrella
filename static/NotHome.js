@@ -6,12 +6,12 @@ function timeline(date,picture){
 };
 
 //Used to create a new list for an empire
-var NewList = function(name){
-    window[name] = [];
+var NewList = function(empire){
+    window[empire] = [];
 };
 
 var AddTimeline = function(empire,timeline){
-    window[name].push(timeline);
+    window[empire].push(timeline);
 };
 
 //date is required everytime for modification
