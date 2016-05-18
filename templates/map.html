@@ -1,0 +1,10 @@
+{% extends "template.html" %} 
+{% block head %}
+<title>Map of {{empire}}</title>
+<link rel="stylesheet" type="text/css" href="static/style.css">
+{% endblock %}
+
+{% block body %}
+{{map}}
+<script type="text/javascript" src="static/map.js"></script>
+{% endblock %}
