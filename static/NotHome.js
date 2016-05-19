@@ -25,3 +25,24 @@ var editTimeline = function(timeline,date,picture){
 	timeline.picture = picture;
     }
 };
+
+var getDate = function(empire,index){
+    return window[empire].date;
+};
+
+var getPic = function(empire,index){
+    return window[empire].picture;
+};
+
+//work in progress
+var update = function(empire){
+    var date = document.getElementById("date");
+    date.innerHTML = getDate(window[empire].date);
+    var pic = document.getElementById("map");
+    pic.innerHTML = getPic(window[empire].pic);
+};
+
+//Work in progress
+//slider.addEventListener("mouseup",update);
+//window.addEventListener("load",update);
+
