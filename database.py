@@ -1,3 +1,4 @@
+
 #Imported Stuff for Activating Database
 from pymongo import MongoClient
 from hashlib import sha512
