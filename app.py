@@ -1,5 +1,7 @@
 from flask import Flask, render_template, session, request
 from flask import redirect, url_for
+from pymongo import MongoClient
+import database.py
 
 app = Flask(__name__)
 
@@ -13,11 +15,12 @@ def data():
 
 @app.route("/map/<empire>", methods=['GET','POST'])
 def map(empire=''):
-    #need links of the maps relating to the empire in a list or something, preferably in order
-    maps=["http://www.mapsofworld.com/images-mow/world-map.jpg", "http://www.mapsofworld.com/images-mow/world-map.jpg"]
+    conn = MongoClient()
+    c = connection['data2']
     str=''
-    for link in maps:
-        str+= '"<img src="'+ link + '" height="42" width="42" class="map">'
+    if not c[empire] is None:
+        for link in maps:
+            str+= '"<img src="'+ link + '" height="42" width="42" class="map">'
     return render_template("map.html", map=str, empire=empire)
 
 if __name__ == "__main__":
