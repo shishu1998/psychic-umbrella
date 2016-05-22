@@ -28,7 +28,7 @@ def addMap(empireName, date, image):
 #Uses the old date to find the table and update it
 #If only changing either date or link but not both, simply give the old date/link depending on what you are updating.
 #e.g If only updating the date, put the old link for new_link. And vice versa
-def updateMap(empireName,old_date,*new_date,*new_link):
+def updateMap(empireName,old_date,new_date=None,new_link=None):
     #Establish Connection
     connection = MongoClient()
     c = connection['data2']
@@ -64,6 +64,8 @@ def getMaps(empireName):
     return array
     
 #addMap("China","bkad","bdasd")
+getMaps("China")
+updateMap("China","bkad","zero")
 getMaps("China")
 
 #For hiding the password
