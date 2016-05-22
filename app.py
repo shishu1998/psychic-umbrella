@@ -19,9 +19,13 @@ def map(empire=''):
     c = connection['data2']
     str=''
     if not c[empire] is None:
-        for link in maps:
-            str+= '"<img src="'+ link + '" height="42" width="42" class="map">'
-    return render_template("map.html", map=str, empire=empire)
+        maps = c[empire]
+        links = ''
+        dates = ''
+        for key in maps.keys():
+            links += '"<img src="'+ maps[key] + '" height="42" width="42" class="map">'
+            dates += key
+    return render_template("map.html", map=str, date = dates, empire=empire)
 
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"
