@@ -43,9 +43,11 @@ function createPop(c){
     });
 
     //set up empire list
-    var empires = container.selectAll("div")
-    .data(Conts[c])
-    .enter()
+    var empires = container.selectAll("a")
+    .data(Conts[c]).enter()
+    .append("a")
+    .attr("href",function(d){return "/map/" + d;})
+    .style("color","inherit")
     .append("div")
     .attr("class","empSelect")
     .append("label")

@@ -43,7 +43,8 @@ g:hover{
 .empReturn{
     pointer-events:auto;
     height: 30px;
-    width: 60%;
+    width: 95%;
+    padding-left: 3px;
     border-style:solid;
     bottom:5px;
     background-color:blue;

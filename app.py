@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, request
 from flask import redirect, url_for
 from pymongo import MongoClient
-import database
+#import database
 
 app = Flask(__name__)
 
