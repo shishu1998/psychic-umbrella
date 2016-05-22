@@ -17,15 +17,17 @@ def data():
 def map(empire=''):
     str=''
     maps = database.getMaps(empire)
+    print maps
     if not maps is None:
-        print maps
         links = ''
         dates = ''
         for ind in range(0,len(maps)):
             links += '"<img src="'+ maps[ind].keys()[0] + '" height="42" width="42" class="map"> '
             dates += maps[ind].values()[0] + ' '
-        links += "/"    
-        return render_template("map.html", map=str, date=dates, empire=empire)
+    print links
+    print dates
+    links += "/"    
+    return render_template("map.html", map=str, date=dates, empire=empire)
 
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"
