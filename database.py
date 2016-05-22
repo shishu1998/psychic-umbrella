@@ -28,12 +28,19 @@ def addMap(empireName, date, image):
 #Uses the old date to find the table and update it
 #If only changing either date or link but not both, simply give the old date/link depending on what you are updating.
 #e.g If only updating the date, put the old link for new_link. And vice versa
-def updateMap(empireName,old_date,new_date,new_link):
+def updateMap(empireName,old_date,*new_date,*new_link):
     #Establish Connection
     connection = MongoClient()
     c = connection['data2']
     #Update stuff
-    c[empireName].update({'date':old_date},{"$set":{'date':new_date,'image':new_link}})
+    if new_date is None:
+        c[empireName].update({'date':old_date},{"$set":{'image':new_link}})
+    elif new_link is None:
+        c[empireName].update({'date':old_date},{"$set":{'date':new_date}})
+    elif new_data is None and new_link is None:
+        return
+    else:
+        c[empireName].update({'date':old_date},{"$set":{'date':new_date,'image':new_link}})
 
 #Get Maps
 #Returns an array of all the maps for an empire
