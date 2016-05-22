@@ -40,3 +40,26 @@ ul {
     margin: 0;
     padding: 0;
 }
+.map{
+    pointer-events: none;
+    position: absolute;
+    top: 10%;
+    width: 100%;
+}
+
+g{
+    pointer-events: fill;
+    fill: #176258;
+}
+g:hover{
+    fill: #2B887C;
+}
+
+#container{
+    width: 50%;
+    height: 50%;
+    margin-left:25%;
+    margin-top: 10%;
+    position: fixed;
+    background-color: cyan;
+}
