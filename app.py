@@ -23,8 +23,8 @@ def map(empire=''):
         links = ''
         dates = ''
         for key in maps.keys():
-            links += '"<img src="'+ maps[key] + '" height="42" width="42" class="map">'
-            dates += key
+            links += '"<img src="'+ maps[key] + '" height="42" width="42" class="map"> '
+            dates += key + ' '
     return render_template("map.html", map=str, date = dates, empire=empire)
 
 if __name__ == "__main__":
