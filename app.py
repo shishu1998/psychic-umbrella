@@ -15,7 +15,6 @@ def data():
 
 @app.route("/map/<empire>", methods=['GET','POST'])
 def map(empire=''):
-    str=''
     maps = database.getMaps(empire)
     print maps
     if not maps is None:
@@ -27,7 +26,7 @@ def map(empire=''):
     print links
     print dates
     links += "/"    
-    return render_template("map.html", map=str, date=dates, empire=empire)
+    return render_template("map.html", map=links, date=dates, empire=empire)
 
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"
