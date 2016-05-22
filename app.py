@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, request
 from flask import redirect, url_for
 from pymongo import MongoClient
-import database.py
+import database
 
 app = Flask(__name__)
 
@@ -15,17 +15,17 @@ def data():
 
 @app.route("/map/<empire>", methods=['GET','POST'])
 def map(empire=''):
-    conn = MongoClient()
-    c = connection['data2']
     str=''
-    if not c[empire] is None:
-        maps = c[empire]
+    maps = database.getMaps(empire)
+    if not maps is None:
+        print maps
         links = ''
         dates = ''
-        for key in maps.keys():
-            links += '"<img src="'+ maps[key] + '" height="42" width="42" class="map"> '
-            dates += key + ' '
-    return render_template("map.html", map=str, date = dates, empire=empire)
+        for ind in range(0,len(maps)):
+            links += '"<img src="'+ maps[ind].keys()[0] + '" height="42" width="42" class="map"> '
+            dates += maps[ind].values()[0] + ' '
+        links += "/"    
+        return render_template("map.html", map=str, date=dates, empire=empire)
 
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"
