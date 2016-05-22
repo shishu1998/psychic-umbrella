@@ -21,8 +21,8 @@ def map(empire=''):
         links = ''
         dates = ''
         for ind in range(0,len(maps)):
-            links += '"<img src="'+ maps[ind].keys()[0] + '" height="42" width="42" class="map"> '
-            dates += maps[ind].values()[0] + ' '
+            links += '"<img src="'+ maps[ind].values()[0] + '" height="42" width="42" class="map"> '
+            dates += maps[ind].keys()[0] + ' '
     print links
     print dates
     links += "/"    
