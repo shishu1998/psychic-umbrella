@@ -1,65 +1,63 @@
-dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-		    background-color: white;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown a:hover {background-color: #f1f1f1}
-.show {display:block;}
-
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 .map{
-    pointer-events: none;
     position: absolute;
     top: 10%;
-    width: 100%;
+    width: 90%;
+    padding-left: 5%;
+    height: 90%;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 g{
-    pointer-events: fill;
     fill: #176258;
 }
 g:hover{
     fill: #2B887C;
 }
 
+.empSelect{
+    pointer-events:auto;
+    height: 20px;
+    width: 95%;
+    padding-left: 3px;
+    border-style: solid;
+    background-color: gray;
+    text-align: left;
+    opacity: 0.8;
+}
+.empSelect:hover{
+    opacity: 1.0;
+}
+.empReturn{
+    pointer-events:auto;
+    height: 30px;
+    width: 60%;
+    border-style:solid;
+    bottom:5px;
+    background-color:blue;
+    padding-top:8px;
+}
+.empReturn:hover{
+    background-color:cyan;
+}
 #container{
+    pointer-events:none;
+    margin-left: 23%;
     width: 50%;
-    height: 50%;
-    margin-left:25%;
-    margin-top: 10%;
+    height: 35%;
     position: fixed;
-    background-color: cyan;
+    bottom: 35%;
+    overflow: auto;
 }
