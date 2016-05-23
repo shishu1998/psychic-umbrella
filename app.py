@@ -1,10 +1,10 @@
 from flask import Flask, render_template, session, request
 from flask import redirect, url_for
 from pymongo import MongoClient
-#import database
+import database
 
 app = Flask(__name__)
-
+database.addMap("China","5/22/16","http://www.mapsofworld.com/china/maps/china-map.gif")
 @app.route("/", methods = ['GET','POST'])
 def index():
     return render_template("index.html")
