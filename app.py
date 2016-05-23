@@ -28,6 +28,9 @@ def map(empire=''):
     links += "/"    
     return render_template("map.html", map=links, date=dates, empire=empire)
 
+@app.route("/<empire>", methods=['GET'])
+def empire(empire=""):
+    return render_template("empire.html", empire=empire);
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"
     app.debug = True
