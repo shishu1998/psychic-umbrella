@@ -64,9 +64,9 @@ def getMaps(empireName):
     return array
     
 #addMap("China","bkad","bdasd")
-getMaps("China")
-updateMap("China","bkad","zero")
-getMaps("China")
+#getMaps("China")
+#updateMap("China","bkad","zero")
+#getMaps("China")
 
 #For hiding the password
 def regPass(password):

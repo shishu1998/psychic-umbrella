@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import database
 
 app = Flask(__name__)
-database.addMap("China","5/22/16","http://www.mapsofworld.com/china/maps/china-map.gif")
+#database.addMap("China","5/22/16","http://www.mapsofworld.com/china/maps/china-map.gif")
 @app.route("/", methods = ['GET','POST'])
 def index():
     return render_template("index.html")
@@ -31,6 +31,7 @@ def map(empire=''):
 @app.route("/<empire>", methods=['GET'])
 def empire(empire=""):
     return render_template("empire.html", empire=empire);
+
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"
     app.debug = True

@@ -46,7 +46,7 @@ function createPop(c){
     var empires = container.selectAll("a")
     .data(Conts[c]).enter()
     .append("a")
-    .attr("href",function(d){return "/map/" + d;})
+    .attr("href",function(d){return "/" + d;})
     .style("color","inherit")
     .append("div")
     .attr("class","empSelect")
