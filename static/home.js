@@ -5,7 +5,7 @@ Conts["AF"]=["Libya","Kenya","South Africa"];
 Conts["AS"]=["China","Korea","Japan","Vietnam"];
 Conts["EU"]=["Britain","France","Germany"];
 Conts["NA"]=["United States","Canada","Mexico","a","b","c","d","e","a","b","c","d","e","a","b","c","d","e"];
-Conts["OC"]=["Australia","Philippines"];
+Conts["OC"]=["Australia","Arstotska"];
 Conts["SA"]=["Maya","Inca","Brazil"];
 
 var popup = document.getElementById("container");
