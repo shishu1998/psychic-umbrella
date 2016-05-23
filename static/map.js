@@ -5,12 +5,13 @@ var dates = elements[0].split(" ");
 var maps = elements[1].split(" ");
 var map = document.getElementById("map");
 var slider = document.getElementById("slider");
-var label = document.getElementById("datelabel");
+var label = document.getElementById("dateLabel");
 
 var update = function(slide){
     slidenum = slide;
     map.src = maps[slidenum];
     label.innerHTML = dates[slidenum];
+    body.innerHTML = label + label;
 };
 
 console.log(dates);
