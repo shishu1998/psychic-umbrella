@@ -1,10 +1,20 @@
 {% extends "template.html" %} 
 {% block head %}
 <title>Map of {{empire}}</title>
-<link rel="stylesheet" type="text/css" href="static/style.css">
+<link rel="stylesheet" type="text/css" href="../static/style.css">
 {% endblock %}
 
 {% block body %}
+<h2>
 {{map}}{{date}}
-<script type="text/javascript" src="static/NotHome.js"></script>
+</h2>
+<h3>
+<img id="map" style="width:350px; height:350px;">
+<form>
+	<input type="range" id="slider" min="0" max="10">
+</form>
+	<label for="slider">Date: </label>
+	<label for="slider" id="dateLabel"></label>
+</h3>
+<script type="text/javascript" src="../static/map.js"></script>
 {% endblock %}
