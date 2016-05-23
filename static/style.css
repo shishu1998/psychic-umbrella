@@ -59,6 +59,6 @@ g:hover{
     width: 50%;
     height: 35%;
     position: fixed;
-    bottom: 35%;
+    top: 35%;
     overflow: auto;
 }

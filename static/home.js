@@ -55,4 +55,9 @@ function createPop(c){
     .text(function(d){return d;});
     container.style("pointer-events","auto");
 
+    if(Conts[c].length<7)
+        container.style("height",44+26*Conts[c].length+"px");
+    else
+        container.style("height","35%");
+
 }
