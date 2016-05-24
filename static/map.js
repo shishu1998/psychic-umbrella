@@ -22,9 +22,20 @@ var update = function(slide){
 
 window.addEventListener("load",function(){
     slider.max = dateArray.length-2;
+    slider.value = 0;
     update(slider.value);
+    //console.log("works0");
 });
 
-slider.addEventListener("mousedown",update(slider.value));
-slider.addEventListener("mousemove",update(slider.value));
-slider.addEventListener("mouseup",update(slider.value));
+slider.addEventListener("mousedown", function(){
+    update(slider.value);
+    //console.log("works1");
+});
+slider.addEventListener("mousemove", function(){
+    update(slider.value);
+    //console.log("works2");
+});
+slider.addEventListener("mouseup", function(){
+    update(slider.value);
+    //console.log("works3");
+});
