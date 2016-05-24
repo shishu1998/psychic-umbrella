@@ -76,7 +76,7 @@ def getMaps(empireName):
     #Return the Dictionary
     
     print array
-    return json.dump(array)
+    return array
     
 #addMap("China","bkad","bdasd")
 #getMaps("China")
