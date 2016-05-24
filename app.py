@@ -25,7 +25,6 @@ def map(empire=''):
             dates += maps[ind].keys()[0] + ' '
     print links
     print dates
-    links += ";"    
     return render_template("map.html", link=links, date=dates, empire=empire)
 
 @app.route("/<empire>", methods=['GET'])
