@@ -2,10 +2,25 @@
 #Imported Stuff for Activating Database
 from pymongo import MongoClient
 from hashlib import sha512
+import json
 #Hidden Password
 hidden =""
 salt =""
 
+
+def addEmpire(continent,empireName):
+    connection = MongoClient()
+    c = connection['data2']
+    d = {'empire-name':empireName}
+    c[continent].insert(d)
+
+def getEmpires(continent):
+    connection = MongoClient()
+    c = connection['data2']
+    array =[]
+    for x in c[continent].find():
+        array.append(x['empire-name'])
+    return json.dump(array)
 #Add Map
 #Takes an EmpireName, A date, and a Link to an image file as parameters
 #Stores the date and image link in a table named by the empireName
@@ -61,7 +76,7 @@ def getMaps(empireName):
     #Return the Dictionary
     
     print array
-    return array
+    return json.dump(array)
     
 #addMap("China","bkad","bdasd")
 #getMaps("China")
