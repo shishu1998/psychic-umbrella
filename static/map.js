@@ -6,17 +6,23 @@ var mapArray = maps.split(" ");
 var map = document.getElementById("map");
 
 var update = function(slide){
-    slidenum = slide;
-    map.src = mapArray[slidenum];
-    label.innerHTML = dateArray[slidenum];
+    if(slide >1 dateArray.length - 1 || slide < 0){
+	update(slidenum);
+    }
+    else{
+	slidenum = slide;
+	map.src = mapArray[slidenum];
+	label.innerHTML = dateArray[slidenum];
+    }
 };
 
 console.log(dates);
 console.log(maps);
 window.addEventListener("load",function(){
-    slider.max = dateArray.length;
-    update(0);
+    slider.max = dateArray.length - 1;
+    update(slider.value);
 });
+
+slider.addEventListener("mousedown",update(slider.value));
 slider.addEventListener("mousemove",update(slider.value));
 slider.addEventListener("mouseup",update(slider.value));
-slider.addEventListener("mousedown",update(slider.value));

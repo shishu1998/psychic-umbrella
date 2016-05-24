@@ -78,8 +78,11 @@ def getMaps(empireName):
     print array
     return array
     
-#addMap("China","bkad","bdasd")
-#getMaps("China")
+#addMap("China","add","january")
+#addMap("China","add2","february")
+#addMap("China","add3","march")
+#addMap("China","add4","april")
+#print getMaps("China")
 #updateMap("China","bkad","zero")
 #getMaps("China")
 

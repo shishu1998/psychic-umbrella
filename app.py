@@ -26,7 +26,7 @@ def map(empire=''):
     print links
     print dates
     links += ";"    
-    return render_template("map.html", map=links, date=dates, empire=empire)
+    return render_template("map.html", link=links, date=dates, empire=empire)
 
 @app.route("/<empire>", methods=['GET'])
 def empire(empire=""):
