@@ -10,24 +10,29 @@ salt =""
 
 def addEmpire(continent,empireName):
     connection = MongoClient()
-    c = connection['data2']
+    c = connection['data3']
     d = {'empire-name':empireName}
     c[continent].insert(d)
 
 def getEmpires(continent):
     connection = MongoClient()
-    c = connection['data2']
+    c = connection['data3']
     array =[]
     for x in c[continent].find():
         array.append(x['empire-name'])
     return json.dump(array)
+
+def rmvEmpire(continent, empireName):
+    connection = MongoClient()
+    c = connection['data3']
+    c[continent].remove({'empire-name':empireName})
 #Add Map
 #Takes an EmpireName, A date, and a Link to an image file as parameters
 #Stores the date and image link in a table named by the empireName
 def addMap(empireName, date, image):
     #Establish Connection
     connection = MongoClient()
-    c = connection['data2']
+    c = connection['data3']
     empName = empireName
     #Create the new row
     d = {'date':date,
@@ -46,7 +51,7 @@ def addMap(empireName, date, image):
 def updateMap(empireName,old_date,new_date=None,new_link=None):
     #Establish Connection
     connection = MongoClient()
-    c = connection['data2']
+    c = connection['data3']
     #Update stuff
     if new_date is None:
         c[empireName].update({'date':old_date},{"$set":{'image':new_link}})
@@ -63,7 +68,7 @@ def updateMap(empireName,old_date,new_date=None,new_link=None):
 def getMaps(empireName):
     #Establish Connection
     connection = MongoClient()
-    c = connection['data2']
+    c = connection['data3']
     empName = empireName
     #Get Everything and put it in a dictionary
     d = {}
@@ -77,7 +82,13 @@ def getMaps(empireName):
     
     print array
     return array
-    
+
+def rmvMap(empire, date):
+    connection = MongoClient()
+    c = connection['data3']
+    c.[empire].remove({'date':date})
+
+
 #addMap("China","add","january")
 #addMap("China","add2","february")
 #addMap("China","add3","march")
