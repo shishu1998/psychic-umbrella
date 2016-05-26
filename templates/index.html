@@ -1,11 +1,12 @@
 {% extends "template.html" %} 
 {% block head %}
 <title>World Map</title>
-<link rel="stylesheet" type="text/css" href="../static/index.css"
-   
+<link rel="stylesheet" type="text/css" href="../static/index.css">
+<script>
+	var Conts = {{Conts|safe}};
+</script>
 {% endblock%}
 {% block body %}
-</div>
 
 <?xml version="1.0" standalone="no"?>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="936pt"
@@ -78,5 +79,5 @@ preserveAspectRatio="xMidYMid meet" class ="map">
   </g>
 </svg>
 <div id="container" align="center"></div>
-<script src="static/index.js"></script>
+<script src="../static/index.js"></script>
 {% endblock %}

@@ -13,14 +13,15 @@ def addEmpire(continent,empireName):
     c = connection['data3']
     d = {'empire-name':empireName}
     c[continent].insert(d)
+    print("running")
 
 def getEmpires(continent):
     connection = MongoClient()
     c = connection['data3']
     array =[]
     for x in c[continent].find():
-        array.append(x['empire-name'])
-    return json.dump(array)
+        array.append(str(x['empire-name']))
+    return array
 
 def rmvEmpire(continent, empireName):
     connection = MongoClient()
@@ -80,19 +81,19 @@ def getMaps(empireName):
         d = {}
     #Return the Dictionary
     
-    print array
+    #print array
     return array
     
 #addMap("China","1111","http://ohrubbishblog.com/wp-content/uploads/2015/08/Scooby-Doo-6.jpg")
 #addMap("China","2222","http://cdn.playbuzz.com/cdn/b9792862-7151-446f-95bf-56ab4ecc4cd8/dec57bda-3c22-4887-99ac-de17b0539f36.jpg")
 #addMap("China","3333","http://vignette3.wikia.nocookie.net/hanna-barbera/images/2/24/Scoobydoo.jpg/revision/latest?cb=20090921172226")
 #addMap("China","4444","http://vignette1.wikia.nocookie.net/villainstournament/images/9/96/Scooby_Doo.png/revision/latest?cb=20151026140949")
-print getMaps("China")
+#print getMaps("China")
 
 def rmvMap(empire, date):
     connection = MongoClient()
     c = connection['data3']
-    c.[empire].remove({'date':date})
+    c[empire].remove({'date':date})
 
 
 #addMap("China","add","january")
@@ -117,4 +118,3 @@ def authenticate(password):
         return True
     return False
 
-    

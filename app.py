@@ -6,7 +6,14 @@ import database
 app = Flask(__name__)
 @app.route("/", methods = ['GET','POST'])
 def index():
-    return render_template("index.html")
+    Conts = {}
+    Conts["AF"] = database.getEmpires("AF")
+    Conts["AS"] = database.getEmpires("AS")
+    Conts["EU"] = database.getEmpires("EU")
+    Conts["NA"] = database.getEmpires("NA")
+    Conts["OC"] = database.getEmpires("OC")
+    Conts["SA"] = database.getEmpires("SA")
+    return render_template("index.html", Conts=Conts )
 
 @app.route("/data")
 def data():
