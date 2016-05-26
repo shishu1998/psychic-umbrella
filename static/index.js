@@ -1,6 +1,7 @@
-//dict of continents, will connect them with mongodb
-
+//selecting the container containing the popup div
 var popup = document.getElementById("container");
+
+//sets up continent selection
 var currCont = null;
 d3.selectAll("g").on("click", function() {
     var newCont = this;
@@ -47,6 +48,7 @@ function createPop(c){
     .text(function(d){return d;});
     container.style("pointer-events","auto");
 
+    //changes div size based on number of empires in the continent
     if(Conts[c].length<7)
         container.style("height",44+26*Conts[c].length+"px");
     else

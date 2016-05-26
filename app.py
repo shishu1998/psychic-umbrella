@@ -4,6 +4,11 @@ from pymongo import MongoClient
 import database
 
 app = Flask(__name__)
+
+#Home Page
+#Gets Empires from MongoDB Database and sets Conts variable in index.html to
+#a dictionary in the format {<Continent>:<Empire>}
+#Renders index.html
 @app.route("/", methods = ['GET','POST'])
 def index():
     Conts = {}
@@ -15,6 +20,8 @@ def index():
     Conts["SA"] = database.getEmpires("SA")
     return render_template("index.html", Conts=Conts )
 
+#Editing Page
+#Work in Progress
 @app.route("/data")
 def data():
     return render_template("data.html")
@@ -33,6 +40,7 @@ def map(empire=''):
     print dates
     return render_template("map.html", link=links, date=dates, empire=empire)
 
+#Renders the page for an empire depending on the empire name
 @app.route("/<empire>", methods=['GET'])
 def empire(empire=""):
     return render_template("empire.html", empire=empire);
