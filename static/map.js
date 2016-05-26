@@ -5,9 +5,15 @@ var dateArray = dates.split(" ");
 var mapArray = maps.split(" ");
 var map = document.getElementById("map");
 
+
+
+function sortNumber(a,b) {
+    return a - b;
+}
+
 var update = function(slide){
     //
-    if(slide > dateArray.length - 2 || slide < 0){
+    if(slide > dateArray.length - 1|| slide < 0){
 	update(slidenum);
     }
     else{
@@ -21,7 +27,13 @@ var update = function(slide){
 //console.log(maps);
 
 window.addEventListener("load",function(){
-    slider.max = dateArray.length-2;
+    dateArray.pop();
+    var i;
+    for(i = 0; i < dateArray.length; i ++){
+	dateArray[i] = parseInt(dateArray[i]);
+    }
+    dateArray.sort(sortNumber);
+    slider.max = dateArray.length-1;
     slider.value = 0;
     update(slider.value);
     //console.log("works0");
