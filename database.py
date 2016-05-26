@@ -92,13 +92,13 @@ def getMaps(empireName):
     
     #print array
     return array
-    
-#addMap("China","1111","http://ohrubbishblog.com/wp-content/uploads/2015/08/Scooby-Doo-6.jpg")
-#addMap("China","2222","http://cdn.playbuzz.com/cdn/b9792862-7151-446f-95bf-56ab4ecc4cd8/dec57bda-3c22-4887-99ac-de17b0539f36.jpg")
-#addMap("China","3333","http://vignette3.wikia.nocookie.net/hanna-barbera/images/2/24/Scoobydoo.jpg/revision/latest?cb=20090921172226")
-#addMap("China","4444","http://vignette1.wikia.nocookie.net/villainstournament/images/9/96/Scooby_Doo.png/revision/latest?cb=20151026140949")
-#print getMaps("China")
-
+"""
+addMap("China","2222","http://cdn.playbuzz.com/cdn/b9792862-7151-446f-95bf-56ab4ecc4cd8/dec57bda-3c22-4887-99ac-de17b0539f36.jpg")
+addMap("China","1111","http://ohrubbishblog.com/wp-content/uploads/2015/08/Scooby-Doo-6.jpg")
+addMap("China","4444","http://vignette1.wikia.nocookie.net/villainstournament/images/9/96/Scooby_Doo.png/revision/latest?cb=20151026140949")
+addMap("China","3333","http://vignette3.wikia.nocookie.net/hanna-barbera/images/2/24/Scoobydoo.jpg/revision/latest?cb=20090921172226")
+print getMaps("China")
+"""
 def rmvMap(empire, date):
     connection = MongoClient()
     c = connection['data3']

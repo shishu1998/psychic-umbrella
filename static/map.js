@@ -4,13 +4,16 @@ var label = document.getElementById("dateLabel");
 var dateArray = dates.split(" ");
 var mapArray = maps.split(" ");
 var map = document.getElementById("map");
+var timeline = [];
 
-
-
-function sortNumber(a,b) {
-    return a - b;
+function struct(date,map){
+    this.date = date;
+    this.map = map;
 }
 
+function sortDate(a,b){
+    return a.date - b.date;
+}
 var update = function(slide){
     //
     if(slide > dateArray.length - 1|| slide < 0){
@@ -18,8 +21,8 @@ var update = function(slide){
     }
     else{
 	slidenum = slide;
-	map.src = mapArray[slidenum];
-	label.innerHTML = dateArray[slidenum];
+	map.src = timeline[slidenum].map;
+	label.innerHTML = timeline[slidenum].date;
     }
 };
 
@@ -31,8 +34,9 @@ window.addEventListener("load",function(){
     var i;
     for(i = 0; i < dateArray.length; i ++){
 	dateArray[i] = parseInt(dateArray[i]);
+	timeline.push(new struct(dateArray[i],mapArray[i]));
     }
-    dateArray.sort(sortNumber);
+    timeline.sort(sortDate);
     slider.max = dateArray.length-1;
     slider.value = 0;
     update(slider.value);
