@@ -22,8 +22,14 @@ def index():
 
 #Editing Page
 #Work in Progress
-@app.route("/data")
-def data():
+@app.route("/edit", methods =['GET','POST'])
+def edit():
+    if request.method == "POST":
+        form = request.form
+        button = form['button']
+        if button == "Add":
+            database.addMap(form['empireName'],form['date'],form['link'])
+            return redirect(url_for("index"))
     return render_template("data.html")
 
 @app.route("/map/<empire>", methods=['GET','POST'])
