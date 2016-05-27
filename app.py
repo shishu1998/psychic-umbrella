@@ -20,16 +20,25 @@ def index():
     Conts["SA"] = database.getEmpires("SA")
     return render_template("index.html", Conts=Conts )
 
+#Archive Page
+#Gets All Empires from MongoDB Database and sets Emps variable in archive.html
+#to an array of empire names (Strings)
+#Renders archive.html
+@app.route("/archive", methods = ['GET','POST'])
+def archive():
+    Emps = []
+    Emps += database.getEmpires("AF")
+    Emps += database.getEmpires("AS")
+    Emps += database.getEmpires("EU")
+    Emps += database.getEmpires("NA")
+    Emps += database.getEmpires("OC")
+    Emps += database.getEmpires("SA")
+    return render_template("archive.html", Emps = Emps)
+
 #Editing Page
 #Work in Progress
-@app.route("/edit", methods =['GET','POST'])
-def edit():
-    if request.method == "POST":
-        form = request.form
-        button = form['button']
-        if button == "Add":
-            database.addMap(form['empireName'],form['date'],form['link'])
-            return redirect(url_for("index"))
+@app.route("/edit/<empire>", methods =['GET','POST'])
+def edit(empire=''):
     return render_template("data.html")
 
 @app.route("/map/<empire>", methods=['GET','POST'])
