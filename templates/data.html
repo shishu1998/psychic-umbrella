@@ -1,14 +1,29 @@
 {% extends "template.html" %}
 {% block head %}
 <title>Data</title>
+<link href="../static/data.css" type="text/css" rel="stylesheet">
 {% endblock head %}}
 
 {% block body %}
 <form>
-  Emipre: <input type="text" id="empire">
-  Date: <input type="text" id="date">
-  Link to Map: <input type="text" id="link">
+  
+  <label>
+    Empire:
+  </label>
+  <input type="text" id="empire">
+  <label>
+    From:
+  </label>
+  <input type="text" id="start">
+  <label>
+    To:
+  </label>
+  <input type="text" id="end">
+  <label>
+    Link to Map:
+  </label>
+  <input type="text" id="link">
+  <br>  
   <button id="submit"> Submit</button>
 </form>
-
 {% endblock %}
