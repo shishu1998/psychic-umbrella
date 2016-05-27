@@ -105,17 +105,6 @@ def rmvMap(empire, date):
     c = connection['data3']
     c[empire].remove({'date':date})
 
-
-#addMap("China","add","january")
-#addMap("China","add2","february")
-#addMap("China","add3","march")
-#addMap("China","add4","april")
-#print getMaps("China")
-
-
-#updateMap("China","bkad","zero")
-#getMaps("China")
-
 #For hiding the password
 def regPass(password):
     salt = uuid4().hex
@@ -128,3 +117,13 @@ def authenticate(password):
         return True
     return False
 
+#addEmpire("NA","United States")
+#addEmpire("NA","Canadia")
+#addEmpire("NA","Aztecs")
+#addEmpire("OC","Australia")
+#addEmpire("OC","Aboriginalies")
+#addEmpire("EU","Great Britania")
+#addEmpire("EU","Francia")
+#addEmpire("EU","GERMANIA")
+#addEmpire("AF","ZuLu")
+#addEmpire("AF","South Africa")
