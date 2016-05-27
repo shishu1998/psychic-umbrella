@@ -1,0 +1,19 @@
+{% extends "template.html" %} 
+
+{% block head %}
+<title>Archives</title>
+<script>
+  var Emps = {{Emps|safe}};
+</script>
+{% endblock %}
+
+{% block body %}
+<button id="add">Add Empire</button>
+{% for empire in Emps %}
+<div>
+<div id="remove">X</div>
+<a href="/edit/{{empire}}">{{empire}}</a>
+</div>
+<script src="static/archive.js"></script>
+{% endfor %}
+{% endblock %}
