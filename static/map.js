@@ -5,6 +5,8 @@ var dateArray = dates.split(" ");
 var mapArray = maps.split(" ");
 var map = document.getElementById("map");
 var timeline = [];
+var transitioning = false;
+var button = document.getElementById("transition");
 
 function struct(date,map){
     this.date = date;
@@ -22,10 +24,26 @@ var update = function(slide){
     else{
 	slidenum = slide;
 	map.src = timeline[slidenum].map;
-	label.innerHTML = timeline[slidenum].date;
+	if(isNaN(timeline[slidenum].date)){
+	    label.innerHTML = "Input error, the date you put in was not a date";
+	}
+	else{
+	    label.innerHTML = timeline[slidenum].date;
+	}
     }
 };
 
+var transition = function(){
+    if(slidenum == dateArray.length -1){
+	slidenum = 0;
+	update(slidenum);
+    }
+    else{
+	slidenum ++;
+	update(slidenum);
+    }
+    slider.value = slidenum;
+};
 //console.log(dates);
 //console.log(maps);
 
@@ -54,4 +72,28 @@ slider.addEventListener("mousemove", function(){
 slider.addEventListener("mouseup", function(){
     update(slider.value);
     //console.log("works3");
+});
+button.addEventListener("click",function(){
+    transitioning = !transitioning;
+    if(transitioning){
+	button.value = "Transitioning: On";
+    }
+    else{
+	button.value = "Transitioning: Off";
+    }
+    while(transitioning){
+	transition();
+    }
+});
+
+window.addEventListener("keydown",function(e){
+    if(e.keyCode == 39 && slidenum != dateArray.length - 1){
+	slidenum ++;
+	update(slidenum);
+    }
+    else if(e.keyCode == 37 && slidenum != 0){
+	slidenum --;
+	update(slidenum);
+    }
+    slider.value = slidenum;
 });
