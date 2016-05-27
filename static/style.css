@@ -1,9 +1,12 @@
 ul {
+    display: inline-block;
     list-style-type: none;
     margin: 0;
     padding: 0;
     width: 200px;
     background-color: #f1f1f1;
+    border: 1px solid #555;
+    float:left;
 }
 
 li a {
@@ -12,10 +15,25 @@ li a {
     color: #000;
     padding: 8px 0 8px 16px;
     text-decoration: none;
+    border-bottom: 1px solid #555;
 }
 
 /* Change the link color on hover */
 li a:hover {
     background-color: #555;
     color: white;
+}
+button {
+    font-family: Arial;
+    color: white;
+    font-size: 14px;
+    background: #176258;
+    padding: 4px 12px 4px 12px;
+    border: solid black 1px;
+    border-radius: 6px;
+    text-decoration: none;    
+}
+
+button:hover {
+    background: #2b887c;
 }

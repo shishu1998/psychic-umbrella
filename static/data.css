@@ -1,0 +1,29 @@
+form{
+    display: inline-block;
+    font-family: "arial";
+    margin: 0 16px 8px 16px;
+    border: 1px solid #176258;
+    border-radius: 6px;
+    padding: 4px 4px 4px 4px; 
+}
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 100px;
+    margin: 4px 0 4px 16px;
+}
+
+input {
+    display: inline-block;
+    float: left;
+    width: 200px;
+    margin: 4px 16px 4px 16px;
+    border-radius: 6px;
+    border: #176258 solid 1px;
+}
+
+button{
+
+}
