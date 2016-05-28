@@ -34,7 +34,7 @@ def getEmpires(continent):
 def rmvEmpire(continent, empireName):
     connection = MongoClient()
     c = connection['data3']
-    c[continent].remove({'empire-name':empireName})
+    c[continent].delete_one({'empire-name':empireName})
 
 #Add Map
 #Takes an EmpireName, A date, and a Link to an image file as parameters
@@ -85,7 +85,7 @@ def getMaps(empireName):
     array = []
     for x in c[empName].find():
        # print x
-        d[x['date']] = x['image']
+        d[str(x['date'])] = str(x['image'])
         array.append(d)
         d = {}
     #Return the Dictionary
@@ -103,7 +103,7 @@ print getMaps("China")
 def rmvMap(empire, date):
     connection = MongoClient()
     c = connection['data3']
-    c[empire].remove({'date':date})
+    c[empire].delete_one({'date':date})
 
 #For hiding the password
 def regPass(password):
@@ -128,4 +128,3 @@ addEmpire("EU","GERMANIA")
 addEmpire("AF","ZuLu")
 addEmpire("AF","South Africa")
 """
-#print(getMaps("ZuLu"))

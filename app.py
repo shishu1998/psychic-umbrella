@@ -71,6 +71,19 @@ def map(empire=''):
 def empire(empire=""):
     return render_template("empire.html", empire=empire);
 
+@app.route("/test", methods=['GET'])
+def test():
+    Emps = []
+    Emps += database.getEmpires("AF")
+    Emps += database.getEmpires("AS")
+    Emps += database.getEmpires("EU")
+    Emps += database.getEmpires("NA")
+    Emps += database.getEmpires("OC")
+    Emps += database.getEmpires("SA")
+    Maps = []
+    for empire in Emps:
+        Maps += database.getMaps(empire)
+    return render_template("test.html", empires=Maps);
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"
     app.debug = True
