@@ -10,6 +10,7 @@ app = Flask(__name__)
 #a dictionary in the format {<Continent>:<Empire>}
 #Renders index.html
 @app.route("/", methods = ['GET','POST'])
+@app.route("/index", methods = ['GET', 'POST'])
 def index():
     Conts = {}
     Conts["AF"] = database.getEmpires("AF")
@@ -39,7 +40,17 @@ def archive():
 #Work in Progress
 @app.route("/edit/<empire>", methods =['GET','POST'])
 def edit(empire=''):
-    return render_template("data.html")
+    if request.method =="POST":
+        form = request.form
+        print(form)
+        if (form['start'] == form['end']):
+            database.addMap(empire,form['start'],form['link'])
+        else:
+            database.addMap(empire,form['start'],form['link'])
+            database.addMap(empire,form['end'],form['link'])
+        return redirect(url_for("index"))
+    else:
+        return render_template("data.html")
 
 @app.route("/map/<empire>", methods=['GET','POST'])
 def map(empire=''):

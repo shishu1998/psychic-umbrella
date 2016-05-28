@@ -116,14 +116,16 @@ def authenticate(password):
     if (sha512((password + salt)*10000).hexdigest() == hidden):
         return True
     return False
-
-#addEmpire("NA","United States")
-#addEmpire("NA","Canadia")
-#addEmpire("NA","Aztecs")
-#addEmpire("OC","Australia")
-#addEmpire("OC","Aboriginalies")
-#addEmpire("EU","Great Britania")
-#addEmpire("EU","Francia")
-#addEmpire("EU","GERMANIA")
-#addEmpire("AF","ZuLu")
-#addEmpire("AF","South Africa")
+"""
+addEmpire("NA","United States")
+addEmpire("NA","Canadia")
+addEmpire("NA","Aztecs")
+addEmpire("OC","Australia")
+addEmpire("OC","Aboriginalies")
+addEmpire("EU","Great Britania")
+addEmpire("EU","Francia")
+addEmpire("EU","GERMANIA")
+addEmpire("AF","ZuLu")
+addEmpire("AF","South Africa")
+"""
+#print(getMaps("ZuLu"))

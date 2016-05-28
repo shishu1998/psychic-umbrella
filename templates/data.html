@@ -5,25 +5,26 @@
 {% endblock head %}}
 
 {% block body %}
-<form>
+<form method = "POST">
   
-  <label>
+ <!-- <label>
     Empire:
   </label>
-  <input type="text" id="empire">
+  <input type="text" id="empire"> -->
   <label>
     From:
   </label>
-  <input type="text" id="start">
+  <input type="text" id="start" name ="start">
   <label>
     To:
   </label>
-  <input type="text" id="end">
+  <input type="text" id="end" name ="end">
   <label>
     Link to Map:
   </label>
-  <input type="text" id="link">
+  <input type="text" id="link" name = "link">
   <br>  
   <button id="submit"> Submit</button>
 </form>
+<!--<script src="data.js"></script>-->
 {% endblock %}
