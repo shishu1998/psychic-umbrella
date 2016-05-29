@@ -1,0 +1,10 @@
+{% extends "template.html" %}
+{% block head %}
+<title>Test</title>
+{% endblock head %}
+{% block body %}
+{% for empire in empires %}
+<div>{{empire.keys()}}</div>
+<img src=  {{empire.values()}}></img>
+{% endfor %}
+{% endblock %}
