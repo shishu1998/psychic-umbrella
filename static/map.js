@@ -79,6 +79,7 @@ button.addEventListener("click",function(){
 	button.value = "Transitioning: On";
     }
     else{
+	clearInterval(slideshow);
 	button.value = "Transitioning: Off";
     }
     var changeMap = function(){
@@ -94,7 +95,7 @@ button.addEventListener("click",function(){
 	}
     }
     var slideshow = setInterval(changeMap,5000);
- });
+});
 
 window.addEventListener("keydown",function(e){
     if(e.keyCode == 39 && slidenum != dateArray.length - 1){
