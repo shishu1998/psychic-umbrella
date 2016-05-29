@@ -81,10 +81,20 @@ button.addEventListener("click",function(){
     else{
 	button.value = "Transitioning: Off";
     }
-    while(transitioning){
-	transition();
+    var changeMap = function(){
+	if(transitioning){
+	    if(slidenum != dateArray.length - 1){
+		slidenum ++;
+	    }
+	    else{
+		slidenum = 0;
+	    }
+	    slider.value = slidenum;
+	    update(slidenum);
+	}
     }
-});
+    var slideshow = setInterval(changeMap,5000);
+ });
 
 window.addEventListener("keydown",function(e){
     if(e.keyCode == 39 && slidenum != dateArray.length - 1){
