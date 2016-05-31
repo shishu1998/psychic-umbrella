@@ -34,7 +34,7 @@ def getEmpires(continent):
 def rmvEmpire(continent, empireName):
     connection = MongoClient()
     c = connection['data3']
-    c[continent].remove({'empire-name':empireName})
+    c[continent].delete_one({'empire-name':empireName})
 
 #Add Map
 #Takes an EmpireName, A date, and a Link to an image file as parameters
@@ -85,7 +85,7 @@ def getMaps(empireName):
     array = []
     for x in c[empName].find():
        # print x
-        d[x['date']] = x['image']
+        d[str(x['date'])] = str(x['image'])
         array.append(d)
         d = {}
     #Return the Dictionary
@@ -98,12 +98,13 @@ addMap("China","1111","http://ohrubbishblog.com/wp-content/uploads/2015/08/Scoob
 addMap("China","4444","http://vignette1.wikia.nocookie.net/villainstournament/images/9/96/Scooby_Doo.png/revision/latest?cb=20151026140949")
 addMap("China","3333","http://vignette3.wikia.nocookie.net/hanna-barbera/images/2/24/Scoobydoo.jpg/revision/latest?cb=20090921172226")
 addMap("China","NotADate","http://www.petsworld.in/blog/wp-content/uploads/2015/05/theeth-scooby.jpg")
+addMap("China","-700","http://science-all.com/images/scooby-doo-05.jpg")
 print getMaps("China")
 """
 def rmvMap(empire, date):
     connection = MongoClient()
     c = connection['data3']
-    c[empire].remove({'date':date})
+    c[empire].delete_one({'date':date})
 
 #For hiding the password
 def regPass(password):
@@ -116,14 +117,15 @@ def authenticate(password):
     if (sha512((password + salt)*10000).hexdigest() == hidden):
         return True
     return False
-
-#addEmpire("NA","United States")
-#addEmpire("NA","Canadia")
-#addEmpire("NA","Aztecs")
-#addEmpire("OC","Australia")
-#addEmpire("OC","Aboriginalies")
-#addEmpire("EU","Great Britania")
-#addEmpire("EU","Francia")
-#addEmpire("EU","GERMANIA")
-#addEmpire("AF","ZuLu")
-#addEmpire("AF","South Africa")
+"""
+addEmpire("NA","United States")
+addEmpire("NA","Canadia")
+addEmpire("NA","Aztecs")
+addEmpire("OC","Australia")
+addEmpire("OC","Aboriginalies")
+addEmpire("EU","Great Britania")
+addEmpire("EU","Francia")
+addEmpire("EU","GERMANIA")
+addEmpire("AF","ZuLu")
+addEmpire("AF","South Africa")
+"""
