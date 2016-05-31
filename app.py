@@ -36,13 +36,11 @@ def archive():
     Emps += database.getEmpires("SA")
     return render_template("archive.html", Emps = Emps)
 
-#Editing Page
-#Work in Progress
+#Editing Empire Page
 @app.route("/edit/<empire>", methods =['GET','POST'])
 def edit(empire=''):
     if request.method =="POST":
         form = request.form
-        print(form)
         if (form['start'] == form['end']):
             database.addMap(empire,form['start'],form['link'])
         else:
@@ -50,7 +48,30 @@ def edit(empire=''):
             database.addMap(empire,form['end'],form['link'])
         return redirect(url_for("index"))
     else:
-        return render_template("data.html")
+        return render_template("data.html", data = "maps")
+
+#Adding Empire Page
+@app.route("/add", methods =['GET','POST'])
+def add():
+    if request.method == "POST":
+        form = request.form
+        print form
+        empire = form['empire']
+        cont = form['continent']
+        addEmpire(cont,empire)
+        if (form['start'] == form['end']):
+            database.addMap(empire,form['start'],form['link'])
+        else:
+            database.addMap(empire,form['start'],form['link'])
+            database.addMap(empire,form['end'],form['link'])
+        if (form['start2'] == form['end2']):
+            database.addMap(empire,form['start2'],form['link2'])
+        else:
+            database.addMap(empire,form['start2'],form['link2'])
+            database.addMap(empire,form['end2'],form['link2'])
+        return render_template("index.html")
+    else:
+        return render_template("data.html", data = "empires")
 
 @app.route("/map/<empire>", methods=['GET','POST'])
 def map(empire=''):

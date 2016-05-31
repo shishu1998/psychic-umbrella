@@ -7,10 +7,7 @@
 {% block body %}
 <form method = "POST">
   
- <!-- <label>
-    Empire:
-  </label>
-  <input type="text" id="empire"> -->
+{% if data == "maps"%}
   <label>
     From:
   </label>
@@ -23,7 +20,48 @@
     Link to Map:
   </label>
   <input type="text" id="link" name = "link">
-  <br>  
+{% elif data == "empires" %}
+  <label>
+    Continent:
+  </label>
+  <input list="continents">
+  <datalist id="continents">
+    <option value="AF">
+    <option value="AS">
+    <option value="EU">
+    <option value="NA">
+    <option value="OC">
+    <option value="SA">
+  </datalist>
+  <label>
+    Empire Name:
+  </label>
+  <input type="text" id="empire" name="empire">
+  <label>
+    From:
+  </label>
+  <input type="text" id="start" name ="start">
+  <label>
+    To:
+  </label>
+  <input type="text" id="end" name="end">
+  <label>
+    Link to Map:
+  </label>
+  <input type="text" id="link" name="link">
+  <label>
+    From:
+  </label>
+  <input type="text" id="start2" name="start2">
+  <label>
+    To:
+  </label>
+  <input type="text" id="end2" name="end2">
+  <label>
+    Link to Map:
+  </label>
+  <input type="text" id="link2" name="link2">
+{%endif%}
   <button id="submit"> Submit</button>
 </form>
 <!--<script src="data.js"></script>-->
