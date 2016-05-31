@@ -5,9 +5,9 @@ body{
 ul {
     display: inline-block;
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: 4px 8px 4px 8px;
     width: 200px;
+    padding: 0 0 0 0;
     background-color: #f1f1f1;
     border: 1px solid #555;
     float:left;
@@ -26,6 +26,9 @@ li a:hover {
     background-color: #555;
     color: white;
 }
+li:last-child{
+    border-bottom:none;
+}
 button {
     color: white;
     font-size: 14px;
@@ -38,4 +41,9 @@ button {
 
 button:hover {
     background: #2b887c;
+}
+
+div{
+    margin:4px 16px 4px 16px;
+    display:inline-block;
 }
