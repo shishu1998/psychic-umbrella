@@ -19,6 +19,7 @@ def index():
     Conts["NA"] = database.getEmpires("NA")
     Conts["OC"] = database.getEmpires("OC")
     Conts["SA"] = database.getEmpires("SA")
+    print Conts
     return render_template("index.html", Conts=Conts )
 
 #Archive Page
@@ -57,8 +58,8 @@ def add():
         form = request.form
         print form
         empire = form['empire']
-        cont = form['continent']
-        addEmpire(cont,empire)
+        cont = form['continents']
+        database.addEmpire(cont,empire)
         if (form['start'] == form['end']):
             database.addMap(empire,form['start'],form['link'])
         else:
