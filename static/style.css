@@ -43,6 +43,21 @@ button:hover {
     background: #2b887c;
 }
 
+input[type="button"] {
+    color: white;
+    font-size: 14px;
+    background: #176258;
+    padding: 4px 12px 4px 12px;
+    border: solid black 1px;
+    border-radius: 6px;
+    text-decoration: none;    
+}
+
+input[type="button"]:hover {
+    background: #2b887c;
+}
+
+
 div{
     margin:4px 16px 4px 16px;
     display:inline-block;
