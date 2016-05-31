@@ -7,6 +7,7 @@ var map = document.getElementById("map");
 var timeline = [];
 var transitioning = false;
 var button = document.getElementById("transition");
+var slideshow;
 
 function struct(date,map){
     this.date = date;
@@ -27,8 +28,11 @@ var update = function(slide){
 	if(isNaN(timeline[slidenum].date)){
 	    label.innerHTML = "Input error, the date you put in was not a date";
 	}
+	else if(timeline[slidenum].date > 0){
+	    label.innerHTML = timeline[slidenum].date + " B.C.E";
+	}
 	else{
-	    label.innerHTML = timeline[slidenum].date;
+	    label.innerHTML = timeline[slidenum].date + " B.C.";
 	}
     }
 };
@@ -74,12 +78,12 @@ slider.addEventListener("mouseup", function(){
     //console.log("works3");
 });
 button.addEventListener("click",function(){
+    clearInterval(slideshow);
     transitioning = !transitioning;
     if(transitioning){
 	button.value = "Transitioning: On";
     }
     else{
-	clearInterval(slideshow);
 	button.value = "Transitioning: Off";
     }
     var changeMap = function(){
@@ -93,8 +97,8 @@ button.addEventListener("click",function(){
 	    slider.value = slidenum;
 	    update(slidenum);
 	}
+	slideshow = setInterval(changeMap,5000);
     }
-    var slideshow = setInterval(changeMap,5000);
 });
 
 window.addEventListener("keydown",function(e){

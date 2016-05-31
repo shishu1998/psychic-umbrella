@@ -98,6 +98,7 @@ addMap("China","1111","http://ohrubbishblog.com/wp-content/uploads/2015/08/Scoob
 addMap("China","4444","http://vignette1.wikia.nocookie.net/villainstournament/images/9/96/Scooby_Doo.png/revision/latest?cb=20151026140949")
 addMap("China","3333","http://vignette3.wikia.nocookie.net/hanna-barbera/images/2/24/Scoobydoo.jpg/revision/latest?cb=20090921172226")
 addMap("China","NotADate","http://www.petsworld.in/blog/wp-content/uploads/2015/05/theeth-scooby.jpg")
+addMap("China","-700","http://science-all.com/images/scooby-doo-05.jpg")
 print getMaps("China")
 """
 def rmvMap(empire, date):
