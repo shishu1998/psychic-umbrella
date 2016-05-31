@@ -1,3 +1,7 @@
+body{
+    font-family: "Arial";
+}
+
 ul {
     display: inline-block;
     list-style-type: none;
@@ -10,7 +14,6 @@ ul {
 }
 
 li a {
-    font-family: "Arial";
     display: block;
     color: #000;
     padding: 8px 0 8px 16px;
@@ -24,7 +27,6 @@ li a:hover {
     color: white;
 }
 button {
-    font-family: Arial;
     color: white;
     font-size: 14px;
     background: #176258;
