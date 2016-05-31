@@ -49,8 +49,10 @@ function createPop(c){
     container.style("pointer-events","auto");
 
     //changes div size based on number of empires in the continent
-    if(Conts[c].length<7)
-        container.style("height",44+26*Conts[c].length+"px");
+    if(Conts[c].length<7){
+        container.style("height",45+26*Conts[c].length+"px");
+        container.style("overflow","hidden");
+    }
     else
         container.style("height","35%");
 

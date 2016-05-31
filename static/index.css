@@ -52,10 +52,10 @@ g:hover{
 }
 #container{
     pointer-events:none;
-    margin-left: 23%;
+    margin-left: 27%;
     width: 50%;
     height: 35%;
     position: fixed;
-    top: 35%;
+    top: 30%;
     overflow: auto;
 }
