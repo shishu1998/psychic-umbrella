@@ -29,10 +29,10 @@ var update = function(slide){
 	    label.innerHTML = "Input error, the date you put in was not a date";
 	}
 	else if(timeline[slidenum].date > 0){
-	    label.innerHTML = timeline[slidenum].date + " B.C.E";
+	    label.innerHTML = timeline[slidenum].date + " B.C.E.";
 	}
 	else{
-	    label.innerHTML = timeline[slidenum].date + " B.C.";
+	    label.innerHTML = timeline[slidenum].date * -1 + " B.C.";
 	}
     }
 };
@@ -97,8 +97,8 @@ button.addEventListener("click",function(){
 	    slider.value = slidenum;
 	    update(slidenum);
 	}
-	slideshow = setInterval(changeMap,5000);
     }
+    slideshow = setInterval(changeMap,5000);
 });
 
 window.addEventListener("keydown",function(e){
