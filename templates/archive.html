@@ -5,6 +5,7 @@
 <script>
   var Emps = {{Emps|safe}};
 </script>
+<link href="../static/archive.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -14,6 +15,7 @@
 <button id="remove">X</button>
 <a href="/edit/{{empire}}">{{empire}}</a>
 </div>
-<script src="static/archive.js"></script>
 {% endfor %}
+</div>
+<script src="static/archive.js"></script>
 {% endblock %}

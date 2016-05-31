@@ -1,16 +1,19 @@
+body{
+    font-family: "Arial";
+}
+
 ul {
     display: inline-block;
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: 4px 8px 4px 8px;
     width: 200px;
+    padding: 0 0 0 0;
     background-color: #f1f1f1;
     border: 1px solid #555;
     float:left;
 }
 
 li a {
-    font-family: "Arial";
     display: block;
     color: #000;
     padding: 8px 0 8px 16px;
@@ -23,8 +26,10 @@ li a:hover {
     background-color: #555;
     color: white;
 }
+li:last-child{
+    border-bottom:none;
+}
 button {
-    font-family: Arial;
     color: white;
     font-size: 14px;
     background: #176258;
@@ -36,4 +41,24 @@ button {
 
 button:hover {
     background: #2b887c;
+}
+
+input[type="button"] {
+    color: white;
+    font-size: 14px;
+    background: #176258;
+    padding: 4px 12px 4px 12px;
+    border: solid black 1px;
+    border-radius: 6px;
+    text-decoration: none;    
+}
+
+input[type="button"]:hover {
+    background: #2b887c;
+}
+
+
+div{
+    margin:4px 16px 4px 16px;
+    display:inline-block;
 }
