@@ -5,8 +5,8 @@ from hashlib import sha512
 import json
 from uuid import uuid4
 #Hidden Password
-random =""
-salt =""
+random ="User"
+
 
 #Add Empire
 #Takes two strings, a continent abbreviation and an empire name
@@ -106,37 +106,37 @@ def rmvMap(empire, date):
     connection = MongoClient()
     c = connection['data3']
     c[empire].delete_one({'date':date})
-"""
+
 #For hiding the password
 def regPass(password):
     connection = MongoClient()
     c = connection['data3']
     salt = uuid4().hex
     hashvalue = sha512((password + salt)*10000).hexdigest()
-    hidden = hashvalue
-    random = "Something"
-    salt = uuid4().hex
-    newrand = sha512((random+salt)*10000).hexdigest()
+    #print random
     d = {
-        'uname':newrand,
-        'pw':hidden,
-        }
+        'uname':random,
+        'pw':hashvalue,
+        'salt':salt,}
+    #print d
     c.authent.insert(d)
-regPass("AA")
+#regPass("AA")
 #Authenticating the password
 def authenticate(password):
     connection = MongoClient()
     c = connection['data3']
+    salt = c.authent.find_one({'uname':random})['salt']
     encrypted = sha512((password + salt)*10000).hexdigest()
-    newrand = sha512((random+salt)*10000).hexdigest()
     
-    if (c.authent.find_one({'uname':newrand})['pw'] == encrypted):
+    if (c.authent.find_one({'uname':random})['pw'] == encrypted):
         print "yes"
         return True
     return False
+    
+    #print c.authent.find_one({'uname':random})['salt']
 
 authenticate("AA")
-
+"""
 addEmpire("NA","United States")
 addEmpire("NA","Canadia")
 addEmpire("NA","Aztecs")
