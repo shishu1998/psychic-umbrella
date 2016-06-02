@@ -28,17 +28,22 @@ def index():
 #Renders archive.html
 @app.route("/archive", methods = ['GET','POST'])
 def archive():
-    Emps = []
-    Emps += database.getEmpires("AF")
-    Emps += database.getEmpires("AS")
-    Emps += database.getEmpires("EU")
-    Emps += database.getEmpires("NA")
-    Emps += database.getEmpires("OC")
-    Emps += database.getEmpires("SA")
-    return render_template("archive.html", Emps = Emps)
+    Emps = {}
+    Emps["AF"] = database.getEmpires("AF")
+    Emps["AS"] = database.getEmpires("AS")
+    Emps["EU"] = database.getEmpires("EU")
+    Emps["NA"] = database.getEmpires("NA")
+    Emps["OC"] = database.getEmpires("OC")
+    Emps["SA"] = database.getEmpires("SA")
+    return render_template("archive.html", Emps = Emps, data = "empires")
 
-#Editing Empire Page
-@app.route("/edit/<empire>", methods =['GET','POST'])
+@app.route("/<empire>/archive")
+def archive2():
+    Maps = database.getMaps(empire)
+    return render_template("archive.html", Emp = empire, Maps = Maps, data = "maps")
+
+#Adding a map to an empire
+@app.route("/addMap/<empire>", methods =['GET','POST'])
 def edit(empire=''):
     if request.method =="POST":
         form = request.form
@@ -51,8 +56,8 @@ def edit(empire=''):
     else:
         return render_template("data.html", data = "maps")
 
-#Adding Empire Page
-@app.route("/add", methods =['GET','POST'])
+#Adding an empire
+@app.route("/addEmpire", methods =['GET','POST'])
 def add():
     if request.method == "POST":
         form = request.form
@@ -70,9 +75,15 @@ def add():
         else:
             database.addMap(empire,form['start2'],form['link2'])
             database.addMap(empire,form['end2'],form['link2'])
-        return render_template("index.html")
+        return redirect(url_for("index"))
     else:
         return render_template("data.html", data = "empires")
+
+#Removing an empire
+@app.route("/removeEmpire/<cont>/<emp>")
+def removeEmpire(cont='',emp=''):
+    database.rmvEmpire(cont,emp)
+    return redirect(url_for("archive"))
 
 @app.route("/map/<empire>", methods=['GET','POST'])
 def map(empire=''):

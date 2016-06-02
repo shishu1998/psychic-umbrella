@@ -2,20 +2,28 @@
 
 {% block head %}
 <title>Archives</title>
-<script>
-  var Emps = {{Emps|safe}};
-</script>
 <link href="../static/archive.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-<a href="/add"><button id="add">Add Empire</button></a>
-{% for empire in Emps %}
+{% if data == "empires" %} 
+<a href="/addEmpire"><button id="add">Add Empire</button></a>
+{% for key in Emps %}
+{% for emp in Emps[key] %}
 <div>
-<button id="remove">X</button>
-<a href="/edit/{{empire}}">{{empire}}</a>
+<a href="/removeEmpire/{{key}}/{{emp}}"><button id="remove">X</button>
+<a href="/{{emp}}/archive">{{emp}}</a>
 </div>
 {% endfor %}
+{% endfor %}
+
+{% elif data == "maps" %}
+<a href="/addMap"><button id="add">Add Empire</button></a>
+{% for map in Maps %}
+<div>
+<a href="/addMap/{{Emp}}"><button id="remove">X</button></a>
+<a href="">{{map}}</a>
+{% endif %}
 </div>
 <script src="static/archive.js"></script>
 {% endblock %}
