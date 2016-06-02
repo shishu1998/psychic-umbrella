@@ -135,7 +135,7 @@ def authenticate(password):
     
     #print c.authent.find_one({'uname':random})['salt']
 
-authenticate("AA")
+#authenticate("AA")
 """
 addEmpire("NA","United States")
 addEmpire("NA","Canadia")
