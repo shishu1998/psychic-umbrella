@@ -35,6 +35,7 @@ def getEmpires(continent):
 def rmvEmpire(continent, empireName):
     connection = MongoClient()
     c = connection['data3']
+    c[empireName].drop()
     c[continent].delete_one({'empire-name':empireName})
 
 #Add Map
