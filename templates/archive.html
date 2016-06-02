@@ -18,11 +18,14 @@
 {% endfor %}
 
 {% elif data == "maps" %}
-<a href="/addMap"><button id="add">Add Empire</button></a>
-{% for map in Maps %}
+<a href="/addMap"><button id="add">Add Map</button></a>
+{% for dict in Maps %}
+{% for date in dict%}
 <div>
-<a href="/addMap/{{Emp}}"><button id="remove">X</button></a>
-<a href="">{{map}}</a>
+<a href=""><button id="remove">X</button></a>
+<a href="">{{date}}</a>
+{% endfor %}
+{% endfor %}
 {% endif %}
 </div>
 <script src="static/archive.js"></script>

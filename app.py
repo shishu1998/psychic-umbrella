@@ -38,7 +38,7 @@ def archive():
     return render_template("archive.html", Emps = Emps, data = "empires")
 
 @app.route("/<empire>/archive")
-def archive2():
+def archive2(empire=''):
     Maps = database.getMaps(empire)
     return render_template("archive.html", Emp = empire, Maps = Maps, data = "maps")
 
