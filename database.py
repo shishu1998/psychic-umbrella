@@ -69,13 +69,13 @@ def updateMap(empireName,old_date,new_date=None,new_link=None):
     print new_date
     print new_link
     if new_date is None:
-        c[empireName].update({'date':old_date},{"$set":{'image':new_link}})
+        c[empireName].update({'date':str(old_date)},{"$set":{'image':new_link}})
     elif new_link is None:
-        c[empireName].update({'date':old_date},{"$set":{'date':new_date}})
+        c[empireName].update({'date':str(old_date)},{"$set":{'date':new_date}})
     elif new_date is None and new_link is None:
         return
     else:
-        c[empireName].update({'date':old_date},{"$set":{'date':new_date,'image':new_link}})
+        c[empireName].update({'date':str(old_date)},{"$set":{'date':new_date,'image':new_link}})
 
 #Get Maps
 #Returns an array of all the maps for an empire
@@ -133,7 +133,7 @@ def authenticate(password):
     encrypted = sha512((password + salt)*10000).hexdigest()
     
     if (c.authent.find_one({'uname':random})['pw'] == encrypted):
-        print "yes"
+        #print "yes"
         return True
     return False
     
