@@ -40,21 +40,7 @@ def archive():
 @app.route("/<empire>/archive")
 def archive2(empire=''):
     Maps = database.getMaps(empire)
-    return render_template("archive.html", Emp = empire, Maps = Maps, data = "maps")
-
-#Adding a map to an empire
-@app.route("/addMap/<empire>", methods =['GET','POST'])
-def edit(empire=''):
-    if request.method =="POST":
-        form = request.form
-        if (form['start'] == form['end']):
-            database.addMap(empire,form['start'],form['link'])
-        else:
-            database.addMap(empire,form['start'],form['link'])
-            database.addMap(empire,form['end'],form['link'])
-        return redirect(url_for("index"))
-    else:
-        return render_template("data.html", data = "maps")
+    return render_template("archive.html", emp = empire, Maps = Maps, data = "maps")
 
 #Adding an empire
 @app.route("/addEmpire", methods =['GET','POST'])
@@ -98,6 +84,40 @@ def map(empire=''):
     print links
     print dates
     return render_template("map.html", link=links, date=dates, empire=empire)
+
+#Adding a map to an empire
+@app.route("/addMap/<empire>", methods =['GET','POST'])
+def addMap(empire=''):
+    if request.method =="POST":
+        form = request.form
+        if (form['start'] == form['end']):
+            database.addMap(empire,form['start'],form['link'])
+        else:
+            database.addMap(empire,form['start'],form['link'])
+            database.addMap(empire,form['end'],form['link'])
+        return redirect(url_for("index"))
+    else:
+        return render_template("data.html", data = "maps")
+
+#Removing a map from an empire
+@app.route("/removeMap/<empire>/<date>", methods=['GET','POST'])
+def removeMap(empire = '', date= ''):
+    database.rmvMap(empire,date)
+    return redirect(url_for("archive2", empire=empire))
+
+#Updating a map
+@app.route("/editMap/<date>/<empire>", methods=['GET','POST'])
+def editMap(empire = '', date = ''):
+    return redirect(url_for("editMapH", empire = empire, date = date))
+
+@app.route("/editMapH/",methods=['GET','POST'])
+def editMapH(empire = '', date = ''):
+    if request.method == "POST":
+	form = request.form
+	database.updateMap(empire,date,form['newDate'],form['newLink'])
+	return redirect(url_for("map", empire=empire))
+    else:
+	return render_template("data.html", data = "maps")
 
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"

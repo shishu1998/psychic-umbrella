@@ -19,7 +19,10 @@ function sortDate(a,b){
 }
 var update = function(slide){
     //
-    if(slide > dateArray.length - 1|| slide < 0){
+    if(dateArray.length == 0){
+	return;
+    }
+    else if(slide > dateArray.length - 1|| slide < 0){
 	update(slidenum);
     }
     else{

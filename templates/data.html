@@ -6,8 +6,16 @@
 
 {% block body %}
 <form method = "POST">
-  
-{% if data == "maps"%}
+{% if data == "date" %}
+  <label>
+    New Date:
+  </label>
+  <input type="text" id="newDate" name="newDate">
+  <label>
+    New Link:
+  </label>
+  <input type="text" id="newLink" name="newLink">
+{% elif data == "maps"%}
   <label>
     From:
   </label>

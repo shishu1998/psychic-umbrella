@@ -18,12 +18,12 @@
 {% endfor %}
 
 {% elif data == "maps" %}
-<a href="/addMap"><button id="add">Add Map</button></a>
+<a href="/addMap/{{emp}}"><button id="add">Add Map</button></a>
 {% for dict in Maps %}
 {% for date in dict%}
 <div>
-<a href=""><button id="remove">X</button></a>
-<a href="">{{date}}</a>
+<a href="/removeMap/{{emp}}/{{date}}"><button id="remove">X</button></a>
+<a href="/editMap/{{date}}/{{emp}}">{{date}}</a>
 {% endfor %}
 {% endfor %}
 {% endif %}
