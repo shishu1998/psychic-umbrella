@@ -27,8 +27,8 @@ def index():
     Conts["NA"] = database.getEmpires("NA")
     Conts["OC"] = database.getEmpires("OC")
     Conts["SA"] = database.getEmpires("SA")
-    print Conts
     return render_template("index.html", Conts=Conts, logged = verify())
+
 @app.route("/login", methods=['GET','POST'])
 def login():
     if request.method == 'GET':
@@ -38,7 +38,7 @@ def login():
         pword = form['password']
         if database.authenticate(pword):
             session['log'] = 'verified'
-            return redirect(url_for('index'), logged = True)
+            return redirect(url_for('index'))
         else:
             return render_template('login.html',logged = False, err="Incorrect Password")
 
@@ -47,7 +47,7 @@ def logout():
     if verify():
         session['log'] = "unverified"
     session['action'] = "Logged Out"
-    return redirect(url_for('index'), logged = False)
+    return redirect(url_for('index'))
         
 #Archive Page
 #Gets All Empires from MongoDB Database and sets Emps variable in archive.html
@@ -67,7 +67,7 @@ def archive():
 @app.route("/<empire>/archive")
 def archive2(empire=''):
     Maps = database.getMaps(empire)
-    return render_template("archive.html", Emp = empire, Maps = Maps, data = "maps", logged = verify())
+    return render_template("archive.html", emp = empire, Maps = Maps, data = "maps", logged = verify())
 
 #Adding an empire
 @app.route("/addEmpire", methods =['GET','POST'])
@@ -88,7 +88,7 @@ def add():
         else:
             database.addMap(empire,form['start2'],form['link2'])
             database.addMap(empire,form['end2'],form['link2'])
-            return redirect(url_for("index"), logged = verify())
+            return redirect(url_for("index"))
     else:
          return render_template("data.html", data = "empires", logged = verify())
 
@@ -96,7 +96,7 @@ def add():
 @app.route("/removeEmpire/<cont>/<emp>")
 def removeEmpire(cont='',emp=''):
     database.rmvEmpire(cont,emp)
-    return redirect(url_for("archive"), logged = verify())
+    return redirect(url_for("archive"))
 
 @app.route("/map/<empire>", methods=['GET','POST'])
 def map(empire=''):
@@ -133,18 +133,14 @@ def removeMap(empire = '', date= ''):
     return redirect(url_for("archive2", empire=empire))
 
 #Updating a map
-@app.route("/editMap/<date>/<empire>", methods=['GET','POST'])
+@app.route("/editMap/<empire>/<int:date>/", methods=['GET','POST'])
 def editMap(empire = '', date = ''):
-    return redirect(url_for("editMapH", empire = empire, date = date))
-
-@app.route("/editMapH/",methods=['GET','POST'])
-def editMapH(empire = '', date = ''):
     if request.method == "POST":
-	form = request.form
-	database.updateMap(empire,date,form['newDate'],form['newLink'])
-	return redirect(url_for("map", empire=empire))
+	   form = request.form
+	   database.updateMap(empire,date,form['newDate'],form['newLink'])
+	   return redirect(url_for("map", empire=empire))
     else:
-	return render_template("data.html", data = "maps", logged=verify())
+	   return render_template("data.html", data = "date", logged=verify())
 
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"

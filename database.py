@@ -51,7 +51,6 @@ def addMap(empireName, date, image):
          'image':image,
         }
     #Add it to the Empire?
-    print d
     c[empName].insert(d)
     #print c[empName].find_one('date': date)
 
@@ -65,11 +64,15 @@ def updateMap(empireName,old_date,new_date=None,new_link=None):
     connection = MongoClient()
     c = connection['data3']
     #Update stuff
+    print empireName
+    print old_date
+    print new_date
+    print new_link
     if new_date is None:
         c[empireName].update({'date':old_date},{"$set":{'image':new_link}})
     elif new_link is None:
         c[empireName].update({'date':old_date},{"$set":{'date':new_date}})
-    elif new_data is None and new_link is None:
+    elif new_date is None and new_link is None:
         return
     else:
         c[empireName].update({'date':old_date},{"$set":{'date':new_date,'image':new_link}})

@@ -2,7 +2,7 @@
 
 {% block head %}
 <title>Archives</title>
-<link href="../static/archive.css" type="text/css" rel="stylesheet">
+<link href="/static/archive.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -23,7 +23,7 @@
 {% for date in dict%}
 <div>
 <a href="/removeMap/{{emp}}/{{date}}"><button id="remove">X</button></a>
-<a href="/editMap/{{date}}/{{emp}}">{{date}}</a>
+<a href="/editMap/{{emp}}/{{date}}/">{{date}}</a>
 {% endfor %}
 {% endfor %}
 {% endif %}
