@@ -9,6 +9,14 @@ app = Flask(__name__)
 #Gets Empires from MongoDB Database and sets Conts variable in index.html to
 #a dictionary in the format {<Continent>:<Empire>}
 #Renders index.html
+
+def verify():
+    if 'log' in session:
+        return session['log'] == 'verified'
+    else:
+        session['log'] = 'unverified'
+        return False
+    
 @app.route("/", methods = ['GET','POST'])
 @app.route("/index", methods = ['GET', 'POST'])
 def index():
@@ -20,8 +28,27 @@ def index():
     Conts["OC"] = database.getEmpires("OC")
     Conts["SA"] = database.getEmpires("SA")
     print Conts
-    return render_template("index.html", Conts=Conts )
+    return render_template("index.html", Conts=Conts, logged = verify())
+@app.route("/login", methods=['GET','POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html', logged = False)
+    if request.method == 'POST':
+        form = request.form
+        pword = form['password']
+        if database.authenticate(pword):
+            session['log'] = 'verified'
+            return redirect(url_for('index'), logged = True)
+        else:
+            return render_template('login.html',logged = False, err="Incorrect Password")
 
+@app.route('/logout')
+def logout():
+    if verify():
+        session['log'] = "unverified"
+    session['action'] = "Logged Out"
+    return redirect(url_for('index'), logged = False)
+        
 #Archive Page
 #Gets All Empires from MongoDB Database and sets Emps variable in archive.html
 #to an array of empire names (Strings)
@@ -35,12 +62,12 @@ def archive():
     Emps["NA"] = database.getEmpires("NA")
     Emps["OC"] = database.getEmpires("OC")
     Emps["SA"] = database.getEmpires("SA")
-    return render_template("archive.html", Emps = Emps, data = "empires")
+    return render_template("archive.html", Emps = Emps, data = "empires", logged = verify())
 
 @app.route("/<empire>/archive")
 def archive2(empire=''):
     Maps = database.getMaps(empire)
-    return render_template("archive.html", emp = empire, Maps = Maps, data = "maps")
+    return render_template("archive.html", Emp = empire, Maps = Maps, data = "maps", logged = verify())
 
 #Adding an empire
 @app.route("/addEmpire", methods =['GET','POST'])
@@ -61,15 +88,15 @@ def add():
         else:
             database.addMap(empire,form['start2'],form['link2'])
             database.addMap(empire,form['end2'],form['link2'])
-        return redirect(url_for("index"))
+            return redirect(url_for("index"), logged = verify())
     else:
-        return render_template("data.html", data = "empires")
+         return render_template("data.html", data = "empires", logged = verify())
 
 #Removing an empire
 @app.route("/removeEmpire/<cont>/<emp>")
 def removeEmpire(cont='',emp=''):
     database.rmvEmpire(cont,emp)
-    return redirect(url_for("archive"))
+    return redirect(url_for("archive"), logged = verify())
 
 @app.route("/map/<empire>", methods=['GET','POST'])
 def map(empire=''):
@@ -83,7 +110,7 @@ def map(empire=''):
             dates += maps[ind].keys()[0] + ' '
     print links
     print dates
-    return render_template("map.html", link=links, date=dates, empire=empire)
+    return render_template("map.html", link=links, date=dates, empire=empire, logged = verify())
 
 #Adding a map to an empire
 @app.route("/addMap/<empire>", methods =['GET','POST'])
@@ -97,7 +124,7 @@ def addMap(empire=''):
             database.addMap(empire,form['end'],form['link'])
         return redirect(url_for("index"))
     else:
-        return render_template("data.html", data = "maps")
+        return render_template("data.html", data = "maps", logged = verify())
 
 #Removing a map from an empire
 @app.route("/removeMap/<empire>/<date>", methods=['GET','POST'])
@@ -117,7 +144,7 @@ def editMapH(empire = '', date = ''):
 	database.updateMap(empire,date,form['newDate'],form['newLink'])
 	return redirect(url_for("map", empire=empire))
     else:
-	return render_template("data.html", data = "maps")
+	return render_template("data.html", data = "maps", logged=verify())
 
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"
