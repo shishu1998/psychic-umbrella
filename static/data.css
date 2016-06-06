@@ -5,6 +5,7 @@ form{
     border: 1px solid #176258;
     border-radius: 6px;
     padding: 4px 4px 4px 4px; 
+    vertical-align: top;
 }
 
 label{
@@ -22,8 +23,4 @@ input {
     margin: 4px 16px 4px 16px;
     border-radius: 6px;
     border: #176258 solid 1px;
-}
-
-button{
-
 }

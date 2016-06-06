@@ -6,27 +6,35 @@
 {% endblock %}
 
 {% block body %}
+
 {% if data == "empires" %} 
+<div>
 <a href="/addEmpire"><button id="add">Add Empire</button></a>
+<ul>
 {% for key in Emps %}
 {% for emp in Emps[key] %}
-<div>
+<li>
 <a href="/removeEmpire/{{key}}/{{emp}}"><button id="remove">X</button>
 <a href="/{{emp}}/archive">{{emp}}</a>
+</li>
+{% endfor %}
+{% endfor %}
+</ul>
 </div>
-{% endfor %}
-{% endfor %}
 
 {% elif data == "maps" %}
 <a href="/addMap"><button id="add">Add Map</button></a>
+<ul>
 {% for dict in Maps %}
 {% for date in dict%}
-<div>
+<li>
 <a href=""><button id="remove">X</button></a>
 <a href="">{{date}}</a>
+</li>
 {% endfor %}
 {% endfor %}
+</ul>
 {% endif %}
-</div>
+
 <script src="static/archive.js"></script>
 {% endblock %}

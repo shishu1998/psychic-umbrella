@@ -1,4 +1,8 @@
-div div{
-    display:block;
-    margin: 2px 2px 2px 2px;
+ul{
+    list-style-type:none;
+    padding: 0;
+}
+div{
+    position:relative;
+    top:10px;
 }
