@@ -32,10 +32,10 @@ var update = function(slide){
 	    label.innerHTML = "Input error, the date you put in was not a date";
 	}
 	else if(timeline[slidenum].date > 0){
-	    label.innerHTML = timeline[slidenum].date + " B.C.E.";
+	    label.innerHTML = timeline[slidenum].date + " C.E.";
 	}
 	else{
-	    label.innerHTML = timeline[slidenum].date * -1 + " B.C.";
+	    label.innerHTML = timeline[slidenum].date * -1 + " B.C.E.";
 	}
     }
 };
