@@ -133,7 +133,7 @@ def removeMap(empire = '', date= ''):
     return redirect(url_for("archive2", empire=empire))
 
 #Updating a map
-@app.route("/editMap/<empire>/<int:date>/", methods=['GET','POST'])
+@app.route("/editMap/<empire>/<date>/", methods=['GET','POST'])
 def editMap(empire = '', date = ''):
     if request.method == "POST":
 	   form = request.form
