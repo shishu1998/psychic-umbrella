@@ -2,7 +2,7 @@
 
 {% block head %}
 <title>Archives</title>
-<link href="../static/archive.css" type="text/css" rel="stylesheet">
+<link href="/static/archive.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -23,14 +23,12 @@
 </div>
 
 {% elif data == "maps" %}
-<a href="/addMap"><button id="add">Add Map</button></a>
-<ul>
+<a href="/addMap/{{emp}}"><button id="add">Add Map</button></a>
 {% for dict in Maps %}
 {% for date in dict%}
-<li>
-<a href=""><button id="remove">X</button></a>
-<a href="">{{date}}</a>
-</li>
+<div>
+<a href="/removeMap/{{emp}}/{{date}}"><button id="remove">X</button></a>
+<a href="/editMap/{{emp}}/{{date}}/">{{date}}</a>
 {% endfor %}
 {% endfor %}
 </ul>
