@@ -127,7 +127,7 @@ def addMap(empire=''):
         return render_template("data.html", data = "maps", logged = verify())
 
 #Removing a map from an empire
-@app.route("/removeMap/<empire>/<date>", methods=['GET','POST'])
+@app.route("/removeMap/<empire>/<int:date>", methods=['GET','POST'])
 def removeMap(empire = '', date= ''):
     database.rmvMap(empire,date)
     return redirect(url_for("archive2", empire=empire))

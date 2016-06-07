@@ -53,7 +53,7 @@ g:hover{
 }
 #container{
     pointer-events:none;
-    margin-left: 27%;
+    margin-left: 10%;
     width: 50%;
     height: 35%;
     position: fixed;

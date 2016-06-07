@@ -23,27 +23,17 @@ input[type="range"]::-webkit-slider-thumb{
     height:400px;
     position:fixed;
     right: 0;
-    left: 250px;
+    left: 0px;
     margin-right: auto;
     margin-left: auto;
-    top: 0;
-    bottom: 0;
+    top: 10px;
     margin-bottom: auto;
     margin-top: auto;
+    text-align: center;
 }
 
 label{
     display:inline-block;
     margin: 8px 0 8px 0;
     font-size: 20px;
-}
-
-#title{
-    width:500px;
-    position:fixed;
-    right: 0;
-    left: 250px;
-    margin-right: auto;
-    margin-left: auto;
-    top: 10%
 }
