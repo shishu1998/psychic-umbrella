@@ -78,17 +78,18 @@ def add():
         empire = form['empire']
         cont = form['continents']
         database.addEmpire(cont,empire)
-        if (form['start'] == form['end']):
+        if (RepresentsInt(form['start']) and RepresentsInt(form['end'])):
+            if (form['start'] == form['end']):
+                database.addMap(empire,form['start'],form['link'])
+            else:
+                database.addMap(empire,form['start'],form['link'])
+                database.addMap(empire,form['end'],form['link'])
+        elif (RepresentsInt(form['start'])):
             database.addMap(empire,form['start'],form['link'])
-        else:
-            database.addMap(empire,form['start'],form['link'])
+        elif (RepresentsInt(form['end'])):
             database.addMap(empire,form['end'],form['link'])
-        if (form['start2'] == form['end2']):
-            database.addMap(empire,form['start2'],form['link2'])
-        else:
-            database.addMap(empire,form['start2'],form['link2'])
-            database.addMap(empire,form['end2'],form['link2'])
-            return redirect(url_for("index"))
+
+        return redirect(url_for("index"))
     else:
          return render_template("data.html", data = "empires", logged = verify())
 
@@ -122,7 +123,7 @@ def addMap(empire=''):
         else:
             database.addMap(empire,form['start'],form['link'])
             database.addMap(empire,form['end'],form['link'])
-        return redirect(url_for("index"))
+        return redirect(url_for("archive2", empire=empire))
     else:
         return render_template("data.html", data = "maps", logged = verify())
 
@@ -131,6 +132,13 @@ def addMap(empire=''):
 def removeMap(empire = '', date= ''):
     database.rmvMap(empire,date)
     return redirect(url_for("archive2", empire=empire))
+
+def RepresentsInt(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
 
 #Updating a map
 @app.route("/editMap/<empire>/<date>/", methods=['GET','POST'])
@@ -141,6 +149,7 @@ def editMap(empire = '', date = ''):
 	   return redirect(url_for("map", empire=empire))
     else:
 	   return render_template("data.html", data = "date", logged=verify())
+
 
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"
