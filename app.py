@@ -74,7 +74,6 @@ def archive2(empire=''):
 def add():
     if request.method == "POST":
         form = request.form
-        print form
         empire = form['empire']
         cont = form['continents']
         database.addEmpire(cont,empire)
@@ -102,15 +101,12 @@ def removeEmpire(cont='',emp=''):
 @app.route("/map/<empire>", methods=['GET','POST'])
 def map(empire=''):
     maps = database.getMaps(empire)
-    #print maps
     if not maps is None:
         links = ''
         dates = ''
         for ind in range(0,len(maps)):
             links += maps[ind].values()[0] + ' '
             dates += maps[ind].keys()[0] + ' '
-    #print links
-    #print dates
     return render_template("map.html", link=links, date=dates, empire=empire, logged = verify())
 
 #Adding a map to an empire

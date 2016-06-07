@@ -52,7 +52,6 @@ def addMap(empireName, date, image):
         }
     #Add it to the Empire?
     c[empName].insert(d)
-    #print c[empName].find_one('date': date)
 
 #UpdateMap
 #Takes an EmpireName, an old date, and an updated date/link
@@ -64,10 +63,6 @@ def updateMap(empireName,old_date,new_date=None,new_link=None):
     connection = MongoClient()
     c = connection['data3']
     #Update stuff
-    print empireName
-    print old_date
-    print new_date
-    print new_link
     if new_date is None:
         c[empireName].update({'date':str(old_date)},{"$set":{'image':new_link}})
     elif new_link is None:
@@ -89,23 +84,11 @@ def getMaps(empireName):
     d = {}
     array = []
     for x in c[empName].find():
-       # print x
         d[str(x['date'])] = str(x['image'])
         array.append(d)
         d = {}
-    #Return the Dictionary
-    
-    #print array
     return array
-"""
-addMap("China","2222","http://cdn.playbuzz.com/cdn/b9792862-7151-446f-95bf-56ab4ecc4cd8/dec57bda-3c22-4887-99ac-de17b0539f36.jpg")
-addMap("China","1111","http://ohrubbishblog.com/wp-content/uploads/2015/08/Scooby-Doo-6.jpg")
-addMap("China","4444","http://vignette1.wikia.nocookie.net/villainstournament/images/9/96/Scooby_Doo.png/revision/latest?cb=20151026140949")
-addMap("China","3333","http://vignette3.wikia.nocookie.net/hanna-barbera/images/2/24/Scoobydoo.jpg/revision/latest?cb=20090921172226")
-addMap("China","NotADate","http://www.petsworld.in/blog/wp-content/uploads/2015/05/theeth-scooby.jpg")
-addMap("China","-700","http://science-all.com/images/scooby-doo-05.jpg")
-print getMaps("China")
-"""
+
 def rmvMap(empire, date):
     connection = MongoClient()
     c = connection['data3']
@@ -117,40 +100,19 @@ def regPass(password):
     c = connection['data3']
     salt = uuid4().hex
     hashvalue = sha512((password + salt)*10000).hexdigest()
-    #print random
     d = {
         'uname':random,
         'pw':hashvalue,
         'salt':salt,}
-    #print d
     c.authent.insert(d)
-#regPass("Are")
+
 #Authenticating the password
 def authenticate(password):
     connection = MongoClient()
     c = connection['data3']
     salt = c.authent.find_one({'uname':random})['salt']
     encrypted = sha512((password + salt)*10000).hexdigest()
-    #print c.authent.find_one({'uname':random})
-    #print "salt" + salt
-    #print encrypted
     if (c.authent.find_one({'uname':random})['pw'] == encrypted):
-        print "yes"
         return True
     return False
     
-
-
-#authenticate("AA")
-"""
-addEmpire("NA","United States")
-addEmpire("NA","Canadia")
-addEmpire("NA","Aztecs")
-addEmpire("OC","Australia")
-addEmpire("OC","Aboriginalies")
-addEmpire("EU","Great Britania")
-addEmpire("EU","Francia")
-addEmpire("EU","GERMANIA")
-addEmpire("AF","ZuLu")
-addEmpire("AF","South Africa")
-"""
