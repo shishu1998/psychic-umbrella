@@ -21,7 +21,6 @@
 {% endfor %}
 </ul>
 </div>
-
 {% elif data == "maps" %}
 <div>
 <a href="/addMap/{{emp}}"><button id="add">Add Map</button></a>
@@ -37,6 +36,19 @@
 </ul>
 </div>
 {% endif %}
-
+<div>
+  <p>
+  To add an Empire : Press on the Add Empire button and get started!
+  </p>
+  <p>
+  To edit an Empire : Press on the Empire's button!
+  </p>
+  <p>
+  To add maps to the Empire: Press Add Map!
+  </p>
+  <p>
+    To edit a map : Press on the date that corresponds to the map you want to edit!
+  </p>
+</div>
 <script src="../static/archive.js"></script>
 {% endblock %}
