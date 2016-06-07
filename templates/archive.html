@@ -14,7 +14,7 @@
 {% for key in Emps %}
 {% for emp in Emps[key] %}
 <li>
-<a href="/removeEmpire/{{key}}/{{emp}}"><button id="remove">X</button>
+<a href="/removeEmpire/{{key}}/{{emp}}" onclick="return confirm('Are you sure you want to remove {{emp}}?');" ><button id="remove">X</button>
 <a href="/{{emp}}/archive">{{emp}}</a>
 </li>
 {% endfor %}
@@ -23,16 +23,20 @@
 </div>
 
 {% elif data == "maps" %}
+<div>
 <a href="/addMap/{{emp}}"><button id="add">Add Map</button></a>
+<ul>
 {% for dict in Maps %}
 {% for date in dict%}
-<div>
-<a href="/removeMap/{{emp}}/{{date}}"><button id="remove">X</button></a>
+<li>
+<a href="/removeMap/{{emp}}/{{date}}" onclick="return confirm('Are you sure you want to remove {{date}} from {{emp}}?');"><button id="remove">X</button></a>
 <a href="/editMap/{{emp}}/{{date}}/">{{date}}</a>
+</li>
 {% endfor %}
 {% endfor %}
 </ul>
+</div>
 {% endif %}
 
-<script src="static/archive.js"></script>
+<script src="../static/archive.js"></script>
 {% endblock %}
