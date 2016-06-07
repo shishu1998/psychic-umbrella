@@ -9,13 +9,15 @@
 {% endblock %}
 
 {% block body %}
-<div>
-<img id="map" style="width:350px; height:350px;">
+<div id="title">
+  <label for="slider">Date: </label>
+  <label for="slider" id="dateLabel"></label>
+</div>
+<div id="container">
+  <img id="map" style="width:350px; height:350px;">
 <form>
 	<input type="range" id="slider" min="0">
 </form>
-	<label for="slider">Date: </label>
-	<label for="slider" id="dateLabel"></label>
 	<br>
 	<input type="button" id="transition" value="Transitioning: Off">
 </div>

@@ -1,26 +1,41 @@
 form{
     display: inline-block;
     font-family: "arial";
-    margin: 0 16px 8px 16px;
-    border: 1px solid #176258;
-    border-radius: 6px;
+    width: 480px;
+    height:320px;
+/*    border: 1px solid #176258; */
     padding: 4px 4px 4px 4px; 
     vertical-align: top;
+    position:fixed;
+    left: 250px;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    top:0;
+    bottom:0;
+    margin-top:auto;
+    margin-bottom:auto;
 }
 
 label{
     display: inline-block;
     float: left;
     clear: left;
-    width: 100px;
-    margin: 4px 0 4px 16px;
+    text-align:right;
+    width: 150px;
+    margin: 8px 0 8px 16px;
 }
 
 input {
     display: inline-block;
     float: left;
-    width: 200px;
-    margin: 4px 16px 4px 16px;
+    width: 250px;
+    margin: 8px 16px 8px 16px;
     border-radius: 6px;
     border: #176258 solid 1px;
+}
+
+#submit{
+    position:relative;
+    left:50%;
 }

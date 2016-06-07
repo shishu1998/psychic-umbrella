@@ -1,5 +1,6 @@
 input[type=range]{
-
+    width:100%;
+    margin:8px 0 8px 0;
 }
 
 input[type="range"]::-webkit-slider-runnable-track{
@@ -15,4 +16,34 @@ input[type="range"]::-webkit-slider-thumb{
     background:#178258;
     height: 10px;
     border-radius: 4px;
+}
+
+#container {
+    width:350px;
+    height:400px;
+    position:fixed;
+    right: 0;
+    left: 250px;
+    margin-right: auto;
+    margin-left: auto;
+    top: 0;
+    bottom: 0;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+label{
+    display:inline-block;
+    margin: 8px 0 8px 0;
+    font-size: 20px;
+}
+
+#title{
+    width:500px;
+    position:fixed;
+    right: 0;
+    left: 250px;
+    margin-right: auto;
+    margin-left: auto;
+    top: 10%
 }

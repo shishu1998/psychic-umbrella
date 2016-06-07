@@ -8,6 +8,7 @@ var timeline = [];
 var transitioning = false;
 var button = document.getElementById("transition");
 var slideshow;
+var title = document.getElementById("title");
 
 function struct(date,map){
     this.date = date;
