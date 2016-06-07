@@ -9,9 +9,6 @@
       <li>
 	<a href="/">Home</a>
       </li>
-      <li>
-	<a href="/archive">Archive</a>
-      </li>
       {% if logged == False %}
       <li>
 	<a href="/login">Login</a>
@@ -19,6 +16,9 @@
       {% else %}
       <li>
 	<a href="/logout">Logout</a>
+      </li>
+      <li>
+  <a href="/archive">Archive</a>
       </li>
       {%endif%}
     </ul>

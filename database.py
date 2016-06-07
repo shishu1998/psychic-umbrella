@@ -124,20 +124,22 @@ def regPass(password):
         'salt':salt,}
     #print d
     c.authent.insert(d)
-#regPass("AA")
+#regPass("Are")
 #Authenticating the password
 def authenticate(password):
     connection = MongoClient()
     c = connection['data3']
     salt = c.authent.find_one({'uname':random})['salt']
     encrypted = sha512((password + salt)*10000).hexdigest()
-    
+    #print c.authent.find_one({'uname':random})
+    #print "salt" + salt
+    #print encrypted
     if (c.authent.find_one({'uname':random})['pw'] == encrypted):
-        #print "yes"
+        print "yes"
         return True
     return False
     
-    #print c.authent.find_one({'uname':random})['salt']
+
 
 #authenticate("AA")
 """
