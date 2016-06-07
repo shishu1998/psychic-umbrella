@@ -5,6 +5,7 @@
     width: 90%;
     padding-left: 5%;
     height: 90%;
+    z-index: -1;
 }
 
 .unselectable {
