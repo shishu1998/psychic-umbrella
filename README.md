@@ -1,7 +1,9 @@
 #MOE
-MOE
+MOE is a project that allows for simple presentation of the change in geographical coverage of different emipres over time.
 
-##Required Packages
+##Requirements
+Python 2.7
+MongoDB
 flask
 ```
 pip install flask
@@ -11,7 +13,8 @@ pymongo
 pip install pymongo
 ```
 
-##Installation
+##Deployment
+Make sure the MongoDB server is up and running  
 Run setup.py to set admin password
 ```
 python setup.py
