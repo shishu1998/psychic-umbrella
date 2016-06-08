@@ -41,7 +41,19 @@ def login():
             return redirect(url_for('index'))
         else:
             return render_template('login.html',logged = False, err="Incorrect Password")
-
+@app.route('/change', methods = ['GET', 'POST'])
+def change():
+    if verify():
+        if request.method == 'POST':
+            form = request.form
+            if database.update(form['old'],form['new']):
+                return redirect(url_for('index'))
+            else:
+                return render_template('change.html', logged = verify(), wrong = "yes", err = "Incorrect Password")
+        else:
+            return render_template('change.html', logged = verify())
+    else:
+        return render_template('change.html',logged=verify())
 @app.route('/logout')
 def logout():
     if verify():

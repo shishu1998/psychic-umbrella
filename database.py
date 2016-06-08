@@ -115,4 +115,13 @@ def authenticate(password):
     if (c.authent.find_one({'uname':random})['pw'] == encrypted):
         return True
     return False
-    
+
+def update(old,new):
+    if authenticate(old):
+        connection = MongoClient()
+        c = connection['data3']
+        c.authent.delete_one({'uname':random})
+        regPass(new)
+        return True
+    else:
+        return False
