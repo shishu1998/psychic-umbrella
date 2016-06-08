@@ -4,6 +4,7 @@
     <title>Changing Password</title>
     <link rel="stylesheet" type="text/css" href="../static/login.css">
   </head>
+  {% if logged %}
   <body>
     <form method = "POST">
       <br>
@@ -14,4 +15,9 @@
       <input type="submit" name ="button" value="Change"></input>
     </form>
   </body>
+  {% else %}
+<div id="ins2">
+<p>You need to log in to view this page.</p>
+</div>
+{%endif%}
 </html>

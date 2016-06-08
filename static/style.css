@@ -64,3 +64,14 @@ div{
     display:inline-block;
     vertical-align: top;
 }
+
+#ins{
+    margin-left: 200px;
+}
+
+#ins2{
+    text-align: center;
+}
+p{
+    color:#176258;
+}
