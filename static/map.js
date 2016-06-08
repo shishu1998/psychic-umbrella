@@ -85,10 +85,10 @@ button.addEventListener("click",function(){
     clearInterval(slideshow);
     transitioning = !transitioning;
     if(transitioning){
-	button.value = "Transitioning: On";
+	button.value = "Autoplay: On";
     }
     else{
-	button.value = "Transitioning: Off";
+	button.value = "Autoplay: Off";
     }
     var changeMap = function(){
 	if(transitioning){

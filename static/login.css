@@ -1,17 +1,29 @@
+input[type="submit"] {
+    margin:4px 8px 4px 8px;
+    color: white;
+    font-size: 14px;
+    background: #176258;
+    padding: 4px 12px 4px 12px;
+    border: solid black 1px;
+    border-radius: 6px;
+    text-decoration: none;    
+}
+
+input[type="submit"]:hover {
+    background: #2b887c;
+}
 form{
-	display: inline-block;
+   	position:fixed;
+   	height: 21px;
+    right: 0;
+    left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+    top: 10px;
+    margin-bottom: auto;
+    margin-top: auto;
+    text-align: center;
+}
+body{
 	font-family: "arial";
-	width: 480px;
-	height: 320px;
-	padding: 4px 4px 4px 4px;
-	vertical-align: top;
-	position: fixed;
-	left: 250px;
-	right: 0;
-	margin-left: auto;
-	margin-right: auto;
-	top: 0;
-	bottom: 0;
-	margin-top: auto;
-	margin-bottom:auto;
 }

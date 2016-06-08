@@ -7,10 +7,9 @@ form{
     padding: 4px 4px 4px 4px; 
     vertical-align: top;
     position:fixed;
+
     left: 30%;
     top:5%;
-    margin-top:auto;
-    margin-bottom:auto;
 }
 
 label{
@@ -18,8 +17,9 @@ label{
     float: left;
     clear: left;
     text-align:right;
-    width: 150px;
+    width: 125px;
     margin: 8px 0 8px 16px;
+    color:#176258;
 }
 
 input {
