@@ -2,9 +2,10 @@ from flask import Flask, render_template, session, request
 from flask import redirect, url_for
 from pymongo import MongoClient
 import database
+import os
 
 app = Flask(__name__)
-
+app.secret_key = os.urandom(24)
 #Home Page
 #Gets Empires from MongoDB Database and sets Conts variable in index.html to
 #a dictionary in the format {<Continent>:<Empire>}
@@ -148,6 +149,5 @@ def editMap(empire = '', date = ''):
 
 
 if __name__ == "__main__":
-    app.secret_key = "plsfortheloveofgodletthiswork"
     app.debug = True
     app.run('0.0.0.0', port=8000)
