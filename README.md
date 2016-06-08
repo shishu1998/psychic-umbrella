@@ -2,8 +2,8 @@
 MOE is a project that allows for simple presentation of the change in geographical coverage of different emipres over time.
 
 ##Requirements
-Python 2.7
-MongoDB
+Python 2.7  
+MongoDB  
 flask
 ```
 pip install flask
