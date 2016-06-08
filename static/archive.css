@@ -9,3 +9,11 @@ a{
 a:hover{
     color:#2b887c;
 }
+#ins{
+	float: right;	
+	margin-top: 10%;
+}
+
+p{
+	color:#176258;
+}
