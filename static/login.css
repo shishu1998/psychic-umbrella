@@ -12,6 +12,23 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background: #2b887c;
 }
+button {
+    margin:4px 8px 4px 8px;
+    color: white;
+    font-size: 14px;
+    background: #176258;
+    padding: 4px 12px 4px 12px;
+    border: solid black 1px;
+    border-radius: 6px;
+    text-decoration: none;
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+}
+
+button:hover {
+    background: #2b887c;
+}
 form{
    	position:fixed;
    	height: 21px;
