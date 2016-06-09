@@ -5,6 +5,9 @@
 {% endblock head %}}
 
 {% block body %}
+
+{% if logged %}
+
 <form method = "POST">
 {% if data == "date" %}
   <label>
@@ -60,5 +63,10 @@
 {%endif%}
   <button id="submit"> Submit</button>
 </form>
+{% else %}
+<div id="ins2">
+<p>You need to log in to view this page.</p>
+</div>
+{%endif%}
 <!--<script src="data.js"></script>-->
 {% endblock %}

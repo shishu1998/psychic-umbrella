@@ -2,11 +2,21 @@
 
 {% block head %}
 <title>Archives</title>
+<script>
+  var dates = {}
+{% if data == "maps" %}
+  {% for dict in Maps %}
+  {% for date in dict%}
+    dates["{{date}}"]="{{dict[date]}}";
+  {%endfor%}
+  {%endfor%}
+{% endif %}
+</script>
 <link href="/static/archive.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-
+{% if logged %}
 {% if data == "empires" %} 
 <div>
 <a href="/addEmpire"><button id="add">Add Empire</button></a>
@@ -29,7 +39,7 @@
 {% for date in dict%}
 <li>
 <a href="/removeMap/{{emp}}/{{date}}" onclick="return confirm('Are you sure you want to remove {{date}} from {{emp}}?');"><button id="remove">X</button></a>
-<a href="/editMap/{{emp}}/{{date}}/">{{date}}</a>
+<a href="/editMap/{{emp}}/{{date}}/" class="date">{{date}}</a>
 </li>
 {% endfor %}
 {% endfor %}
@@ -37,18 +47,31 @@
 </div>
 {% endif %}
 <div id="ins">
+{%if data == "empires" %}
   <p>
   To add an Empire : Press on the Add Empire button and get started!
   </p>
   <p>
   To edit an Empire : Click on the Empire's Name!
   </p>
+{%elif data == "maps"%}
   <p>
   To add maps to the Empire: Press Add Map!
   </p>
   <p>
     To edit a map : Press on the date that corresponds to the map you want to edit!
   </p>
+  <p>
+    To view a map : Hover over the link!
+  </p>
+<img src="" id="pic"></img>
+{% endif %}
 </div>
 <script src="../static/archive.js"></script>
+{% else %}
+<div id="ins2">
+<p>You need to log in to view this page</p>
+</div>
+{% endif %}
+
 {% endblock %}

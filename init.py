@@ -5,6 +5,7 @@ from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import database
+import os
 
 UPLOAD_FOLDER = os.path.dirname(__file__) + '/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -12,7 +13,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 #max size of 16 MB
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-
+app.secret_key = os.urandom(24)
 #Home Page
 #Gets Empires from MongoDB Database and sets Conts variable in index.html to
 #a dictionary in the format {<Continent>:<Empire>}
@@ -49,7 +50,19 @@ def login():
             return redirect(url_for('index'))
         else:
             return render_template('login.html',logged = False, err="Incorrect Password")
-
+@app.route('/change', methods = ['GET', 'POST'])
+def change():
+    if verify():
+        if request.method == 'POST':
+            form = request.form
+            if database.update(form['old'],form['new']):
+                return redirect(url_for('index'))
+            else:
+                return render_template('change.html', logged = verify(), wrong = "yes", err = "Incorrect Password")
+        else:
+            return render_template('change.html', logged = verify())
+    else:
+        return render_template('change.html',logged=verify())
 @app.route('/logout')
 def logout():
     if verify():
@@ -185,6 +198,5 @@ def uploaded_file(filename):
                                filename)
        
 if __name__ == "__main__":
-    app.secret_key = "plsfortheloveofgodletthiswork"
     app.debug = True
     app.run('0.0.0.0', port=8000)
