@@ -24,9 +24,9 @@ The desired password can be change by changing setup.py
 regPass("<insert password here>")
 
 ```
-Run app.py to start server
+Run init.py to start server
 ```
-python app.py
+python init.py
 ```
 ##The Team
 Boying Tang  
