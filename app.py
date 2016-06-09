@@ -1,9 +1,17 @@
+import os
 from flask import Flask, render_template, session, request
 from flask import redirect, url_for
 from pymongo import MongoClient
+from werkzeug.utils import secure_filename
+from flask import send_from_directory
 import database
 
+UPLOAD_FOLDER = os.path.dirname(__file__) + '/uploads'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+#max size of 16 MB
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 #Home Page
 #Gets Empires from MongoDB Database and sets Conts variable in index.html to
@@ -146,7 +154,36 @@ def editMap(empire = '', date = ''):
     else:
 	   return render_template("data.html", data = "date", logged=verify())
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file(empire = ''):
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit a empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        filepath = os.path.dirname(__file__) + "/upload/" + file.filename
+        if file and allowed_file(file.filename) and !os.path.isfile(filepath):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file',
+                                    filename=filename))
+        return redirect(url_for("archive2", empire = empire))
+    
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return os.path.dirname(__file__) + send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
+       
 if __name__ == "__main__":
     app.secret_key = "plsfortheloveofgodletthiswork"
     app.debug = True
