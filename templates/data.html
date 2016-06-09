@@ -36,15 +36,14 @@
   <label>
     Continent:
   </label>
-  <input list="continents" name="continents">
-  <datalist id="continents">
-    <option value="AF">
-    <option value="AS">
-    <option value="EU">
-    <option value="NA">
-    <option value="OC">
-    <option value="SA">
-  </datalist>
+  <select id="continents" name="continents">
+    <option value="AF">Africa</option>
+    <option value="AS">Asia</option>
+    <option value="EU">Europe</option>
+    <option value="NA">North America</option>
+    <option value="OC">Oceania</option>
+    <option value="SA">South America</option>
+  </select>
   <label>
     Empire Name:
   </label>
@@ -61,6 +60,9 @@
     Link to Map:
   </label>
   <input type="text" id="link" name="link">
+  <label>
+    Upload Map:
+  </label>
   <input type="file" name="file" id="file"> 
 {%endif%}
   <button id="submit"> Submit</button>
