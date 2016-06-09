@@ -8,7 +8,7 @@
 
 {% if logged %}
 
-<form method = "POST">
+<form method = "POST" enctype="multipart/form-data">
 {% if data == "date" %}
   <label>
     New Date:
@@ -31,6 +31,7 @@
     Link to Map:
   </label>
   <input type="text" id="link" name = "link">
+  <input type="file" name="file" id="file">
 {% elif data == "empires" %}
   <label>
     Continent:
@@ -60,6 +61,7 @@
     Link to Map:
   </label>
   <input type="text" id="link" name="link">
+  <input type="file" name="file" id="file"> 
 {%endif%}
   <button id="submit"> Submit</button>
 </form>

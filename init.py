@@ -1,11 +1,9 @@
 import os
-from flask import Flask, render_template, session, request
-from flask import redirect, url_for
+from flask import Flask, render_template, session, request, redirect, url_for
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import database
-import os
 
 UPLOAD_FOLDER = os.path.dirname(__file__) + '/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -185,7 +183,7 @@ def upload_file(empire = ''):
             flash('No selected file')
             return redirect(request.url)
         filepath = os.path.dirname(__file__) + "/upload/" + file.filename
-        if file and allowed_file(file.filename) and !os.path.isfile(filepath):
+        if file and allowed_file(file.filename) and not os.path.isfile(filepath):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('uploaded_file',
