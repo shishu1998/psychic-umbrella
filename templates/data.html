@@ -22,7 +22,7 @@
     Upload Map:
   </label>
   <input type="file" name="file" id="file"> 
-{% elif data == "maps"%}
+  {% elif data == "maps"%}
   <label>
     From:
   </label>
@@ -39,7 +39,8 @@
     Upload Map:
   </label>
   <input type="file" name="file" id="file">
-{% elif data == "empires" %}
+
+  {% elif data == "empires" %}
   <label>
     Continent:
   </label>
@@ -74,6 +75,9 @@
 {%endif%}
   <button id="submit"> Submit</button>
 </form>
+
+    <p>Dates in BC or BCE should be negative</p>
+  
 {% else %}
 <div id="ins2">
 <p>You need to log in to view this page.</p>
