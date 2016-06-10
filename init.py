@@ -5,8 +5,8 @@ from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import database
 
-UPLOAD_FOLDER = os.path.dirname(__file__) + '/uploads'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+UPLOAD_FOLDER = os.path.dirname(__file__) + 'static/'
+ALLOWED_EXTENSIONS = set(['txt', 'PNG', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 #max size of 16 MB
@@ -96,16 +96,21 @@ def add():
         empire = form['empire']
         cont = form['continents']
         database.addEmpire(cont,empire)
+        path = upload_file()
+        if(path == "/" or path is None):
+            path = form['link']
+        if(path is None):
+            return redirect(url_for("add"))
         if (RepresentsInt(form['start']) and RepresentsInt(form['end'])):
             if (form['start'] == form['end']):
-                database.addMap(empire,form['start'],form['link'])
+                database.addMap(empire,form['start'],path)
             else:
-                database.addMap(empire,form['start'],form['link'])
-                database.addMap(empire,form['end'],form['link'])
+                database.addMap(empire,form['start'],path)
+                database.addMap(empire,form['end'],path)
         elif (RepresentsInt(form['start'])):
-            database.addMap(empire,form['start'],form['link'])
+            database.addMap(empire,form['start'],path)
         elif (RepresentsInt(form['end'])):
-            database.addMap(empire,form['end'],form['link'])
+            database.addMap(empire,form['end'],path)
 
         return redirect(url_for("index"))
     else:
@@ -133,11 +138,16 @@ def map(empire=''):
 def addMap(empire=''):
     if request.method =="POST":
         form = request.form
+        path = upload_file()
+        if(path == "/" or path is None):
+            path = form['link']
+        if(path is None):
+            return redirect(url_for("addMap", empire=empire))
         if (form['start'] == form['end']):
-            database.addMap(empire,form['start'],form['link'])
+            database.addMap(empire,form['start'],path)
         else:
-            database.addMap(empire,form['start'],form['link'])
-            database.addMap(empire,form['end'],form['link'])
+            database.addMap(empire,form['start'],path)
+            database.addMap(empire,form['end'],path)
         return redirect(url_for("archive2", empire=empire))
     else:
         return render_template("data.html", data = "maps", logged = verify())
@@ -159,36 +169,38 @@ def RepresentsInt(s):
 @app.route("/editMap/<empire>/<date>/", methods=['GET','POST'])
 def editMap(empire = '', date = ''):
     if request.method == "POST":
-	   form = request.form
-	   database.updateMap(empire,date,form['newDate'],form['newLink'])
-	   return redirect(url_for("map", empire=empire))
+        form = request.form
+        path = upload_file()
+        if(path is None or path == "/"):
+            path = form['link']
+        if(path is None):
+            return redirect(url_for("editMap",empire=empire,date=date))
+        database.updateMap(empire,date,form['newDate'],path)
+        return redirect(url_for("map", empire=empire))
     else:
-	   return render_template("data.html", data = "date", logged=verify())
+        return render_template("data.html", data = "date", logged=verify())
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-@app.route('/upload', methods=['GET', 'POST'])
-def upload_file(empire = ''):
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        filepath = os.path.dirname(__file__) + "/upload/" + file.filename
-        if file and allowed_file(file.filename) and not os.path.isfile(filepath):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
-        return redirect(url_for("archive2", empire = empire))
+def upload_file():
+    # check if the post request has the file part
+    if 'file' not in request.files:
+        return None
+    file = request.files['file']
+    # if user does not select file, browser also
+    # submit a empty part without filename
+    if file.filename == '':
+        return None
+    filepath = os.path.dirname(__file__) + "static/" + file.filename
+    if os.path.isfile(filepath):
+        return "/"+filepath
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return "/" + filepath
+    return None
     
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
