@@ -35,3 +35,6 @@ input {
     position:relative;
     left:50%;
 }
+p{
+    float:right;
+}

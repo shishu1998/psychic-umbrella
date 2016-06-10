@@ -1,13 +1,15 @@
 .map{
     position: absolute;
-    top: 10%;
+    top: 5%;
     left: 5%;
     width: 90%;
     padding-left: 5%;
     height: 90%;
     z-index: -1;
 }
-
+body{
+    height: 0px;
+}
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -15,7 +17,8 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    cursor:pointer;
+    cursor: default;
+    pointer-events:none;
 }
 
 g{
