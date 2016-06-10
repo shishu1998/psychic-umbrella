@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from hashlib import sha512
 import json
 from uuid import uuid4
+import os
 #Hidden Password
 random ="User"
 
@@ -35,6 +36,9 @@ def getEmpires(continent):
 def rmvEmpire(continent, empireName):
     connection = MongoClient()
     c = connection['data3']
+    for x in c[empireName].find():
+        if os.path.isfile(str(x['image'])[1:]):
+            os.remove(str(x['image'])[1:])
     c[empireName].drop()
     c[continent].delete_one({'empire-name':empireName})
 
@@ -51,7 +55,7 @@ def addMap(empireName, date, image):
          'image':image,
         }
     #Add it to the Empire?
-    if empName is None or date is None or image is None:
+    if empName == "" or date == "" or image == "":
         return
     else:
         c[empName].insert(d)
@@ -66,15 +70,28 @@ def updateMap(empireName,old_date,new_date=None,new_link=None):
     connection = MongoClient()
     c = connection['data3']
     #Update stuff
+    if new_date == "":
+        new_date = None
+    if new_link == "":
+        new_link = None
+    for x in c[empireName].find({'date':old_date}):
+        path = str(x['image'])
     if new_date is None and new_link is None:
-        return
+        return       
     elif new_date is None:
+        print "here"
         c[empireName].update({'date':str(old_date)},{"$set":{'image':new_link}})
+        if c[empireName].find({'image':path}).count() == 0:
+            if os.path.isfile(path[1:]):
+                os.remove(path[1:])    
     elif new_link is None:
         c[empireName].update({'date':str(old_date)},{"$set":{'date':new_date}})
     else:
+        print "here2"
         c[empireName].update({'date':str(old_date)},{"$set":{'date':new_date,'image':new_link}})
-
+        if c[empireName].find({'image':path}).count() == 0:
+            if os.path.isfile(path[1:]):
+                os.remove(path[1:])   
 #Get Maps
 #Returns an array of all the maps for an empire
 #The array is an array of dictionaries where the dictionary has all the dates as keys and corresponding map links as entries
@@ -95,7 +112,16 @@ def getMaps(empireName):
 def rmvMap(empire, date):
     connection = MongoClient()
     c = connection['data3']
+    for x in c[empire].find({'date':date}):
+        path = str(x['image'])
     c[empire].delete_one({'date':date})
+    print path[1:]
+    print c[empire].find({'image':path}).count()
+    if c[empire].find({'image':path}).count() == 0:
+        print "BOOOO"
+        if os.path.isfile(path[1:]):
+            print "YAAAY"
+            os.remove(path[1:])
 
 #For hiding the password
 def regPass(password):

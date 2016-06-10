@@ -20,6 +20,12 @@ d3.selectAll("g").on("click", function() {
 //creates the popup screen when a continent is clicked
 var container = d3.select("#container");
 function createPop(c){
+    for(var i = 0; i < Conts[c].length; i++){
+        if(Conts[c][i]==""){
+            Conts[c].splice(i,1);
+            i--;
+        }
+    }
     //resets container
     popup.innerHTML = "";
 
@@ -36,9 +42,8 @@ function createPop(c){
     });
 
     //set up empire list
-    var empires = container.selectAll("a")
-    .data(Conts[c]).enter()
-    .append("a")
+    var empires = container.selectAll("a").data(Conts[c]).enter()
+    empires.append("a")
     .attr("href",function(d){return "/map/" + d;})
     .style("color","inherit")
     .append("div")
