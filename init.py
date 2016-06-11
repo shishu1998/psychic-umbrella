@@ -5,8 +5,8 @@ from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import database
 
-UPLOAD_FOLDER = os.path.dirname(__file__) + 'static/'
-ALLOWED_EXTENSIONS = set(['txt', 'PNG', 'png', 'jpg', 'jpeg', 'gif'])
+UPLOAD_FOLDER = os.path.dirname(__file__) + 'static/images/'
+ALLOWED_EXTENSIONS = set(['PNG', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 #max size of 16 MB
@@ -193,7 +193,7 @@ def upload_file():
     # submit a empty part without filename
     if file.filename == '':
         return None
-    filepath = os.path.dirname(__file__) + "static/" + file.filename
+    filepath = os.path.dirname(__file__) + "static/images/" + file.filename
     if os.path.isfile(filepath):
         return "/"+filepath
     if file and allowed_file(file.filename):
