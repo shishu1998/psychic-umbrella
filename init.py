@@ -27,13 +27,7 @@ def verify():
 @app.route("/", methods = ['GET','POST'])
 @app.route("/index", methods = ['GET', 'POST'])
 def index():
-    Conts = {}
-    Conts["AF"] = database.getEmpires("AF")
-    Conts["AS"] = database.getEmpires("AS")
-    Conts["EU"] = database.getEmpires("EU")
-    Conts["NA"] = database.getEmpires("NA")
-    Conts["OC"] = database.getEmpires("OC")
-    Conts["SA"] = database.getEmpires("SA")
+    Conts = database.getEmpires()
     return render_template("index.html", Conts=Conts, logged = verify())
 
 @app.route("/login", methods=['GET','POST'])
@@ -74,13 +68,7 @@ def logout():
 #Renders archive.html
 @app.route("/archive", methods = ['GET','POST'])
 def archive():
-    Emps = {}
-    Emps["AF"] = database.getEmpires("AF")
-    Emps["AS"] = database.getEmpires("AS")
-    Emps["EU"] = database.getEmpires("EU")
-    Emps["NA"] = database.getEmpires("NA")
-    Emps["OC"] = database.getEmpires("OC")
-    Emps["SA"] = database.getEmpires("SA")
+    Emps = database.getEmpires()
     return render_template("archive.html", Emps = Emps, data = "empires", logged = verify())
 
 @app.route("/<empire>/archive")
@@ -94,8 +82,7 @@ def add():
     if request.method == "POST":
         form = request.form
         empire = form['empire']
-        cont = form['continents']
-        database.addEmpire(cont,empire)
+        database.addEmpire(empire)
         path = upload_file()
         if(path == "/" or path is None):
             path = form['link']
@@ -117,9 +104,9 @@ def add():
          return render_template("data.html", data = "empires", logged = verify())
 
 #Removing an empire
-@app.route("/removeEmpire/<cont>/<emp>")
-def removeEmpire(cont='',emp=''):
-    database.rmvEmpire(cont,emp)
+@app.route("/removeEmpire/<emp>")
+def removeEmpire(emp=''):
+    database.rmvEmpire(emp)
     return redirect(url_for("archive"))
 
 @app.route("/map/<empire>", methods=['GET','POST'])

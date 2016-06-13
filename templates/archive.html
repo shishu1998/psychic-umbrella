@@ -25,14 +25,12 @@
 <a href="/World/archive" style="margin-left:10px">World</a>
 </li>
 {% for key in Emps %}
-{% for emp in Emps[key] %}
-{% if not emp == ""%}
+{% if not key == ""%}
 <li>
-<a href="/removeEmpire/{{key}}/{{emp}}" onclick="return confirm('Are you sure you want to remove {{emp}}?');" ><button id="remove">X</button>
-<a href="/{{emp}}/archive">{{emp}}</a>
+<a href="/removeEmpire/{{key}}" onclick="return confirm('Are you sure you want to remove {{key}}?');" ><button id="remove">X</button>
+<a href="/{{key}}/archive">{{key}}</a>
 </li>
 {% endif %}
-{% endfor %}
 {% endfor %}
 </ul>
 </div>

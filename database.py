@@ -10,37 +10,31 @@ random ="User"
 
 
 #Add Empire
-#Takes two strings, a continent abbreviation and an empire name
-#Adds an empire to a continent collection with the key 'empire-name'
-def addEmpire(continent,empireName):
+def addEmpire(empireName):
     connection = MongoClient()
     c = connection['data3']
     d = {'empire-name':empireName}
-    c[continent].insert(d)
+    c.empires.insert(d)
     
 #Get Empires
-#Takes one string, the continent abbreviation
-#Get the empire names of a continent in the form of a list of strings
-#Returns the list of strings
-def getEmpires(continent):
+def getEmpires():
     connection = MongoClient()
     c = connection['data3']
     array =[]
-    for x in c[continent].find():
+    for x in c.empires.find():
         array.append(str(x['empire-name']))
     return array
-
 #Remove Empire
 #Takes two strings, a continent abbreviation and an empire name
 #Removes an empire from the continent
-def rmvEmpire(continent, empireName):
+def rmvEmpire(empireName):
     connection = MongoClient()
     c = connection['data3']
     for x in c[empireName].find():
         if os.path.isfile(str(x['image'])[1:]):
             os.remove(str(x['image'])[1:])
     c[empireName].drop()
-    c[continent].delete_one({'empire-name':empireName})
+    c.empires.delete_one({'empire-name':empireName})
 
 #Add Map
 #Takes an EmpireName, A date, and a Link to an image file as parameters
