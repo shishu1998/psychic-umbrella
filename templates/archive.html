@@ -2,16 +2,11 @@
 
 {% block head %}
 <title>Archives</title>
+{%if data == "maps"%}
 <script>
-  var dates = {}
-{% if data == "maps" %}
-  {% for dict in Maps %}
-  {% for date in dict%}
-    dates["{{date}}"]="{{dict[date]}}";
-  {%endfor%}
-  {%endfor%}
-{% endif %}
+  var dates = {{Maps|safe}};
 </script>
+{%endif%}
 <link href="/static/archive.css" type="text/css" rel="stylesheet">
 {% endblock %}
 
@@ -39,14 +34,12 @@
 <a href="/addMap/{{emp}}"><button id="add">Add Map</button></a>
 <ul>
 {% for dict in Maps %}
-{% for date in dict%}
-{% if not date == "" %}
+{% if not dict['date'] == "" %}
 <li>
-<a href="/removeMap/{{emp}}/{{date}}" onclick="return confirm('Are you sure you want to remove {{date}} from {{emp}}?');"><button id="remove">X</button></a>
-<a href="/editMap/{{emp}}/{{date}}/" class="date">{{date}}</a>
+<a href="/removeMap/{{emp}}/{{dict['date']}}" onclick="return confirm('Are you sure you want to remove {{dict['date']}} from {{emp}}?');"><button id="remove">X</button></a>
+<a href="/editMap/{{emp}}/{{dict['date']}}/" class="date">{{dict['date']}}</a>
 </li>
 {% endif %}
-{% endfor %}
 {% endfor %}
 </ul>
 </div>

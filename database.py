@@ -14,7 +14,7 @@ def addEmpire(empireName):
     connection = MongoClient()
     c = connection['data3']
     d = {'empire-name':empireName}
-    c.empires.insert(d)
+    c['empires'].insert(d)
     
 #Get Empires
 def getEmpires():
@@ -39,14 +39,17 @@ def rmvEmpire(empireName):
 #Add Map
 #Takes an EmpireName, A date, and a Link to an image file as parameters
 #Stores the date and image link in a table named by the empireName
-def addMap(empireName, date, image):
+def addMap(empireName, date, image, tag):
     #Establish Connection
     connection = MongoClient()
     c = connection['data3']
     empName = empireName
     #Create the new row
-    d = {'date':date,
+
+    d = {
+         'date':date,
          'image':image,
+         'tag':tag
         }
     #Add it to the Empire?
     if empName == "" or date == "" or image == "":
@@ -59,33 +62,31 @@ def addMap(empireName, date, image):
 #Uses the old date to find the table and update it
 #If only changing either date or link but not both, simply give the old date/link depending on what you are updating.
 #e.g If only updating the date, put the old link for new_link. And vice versa
-def updateMap(empireName,old_date,new_date=None,new_link=None):
+def updateMap(empireName,old_date,new_date=None,new_link=None,new_tag=None):
     #Establish Connection
     connection = MongoClient()
     c = connection['data3']
+
+   
     #Update stuff
     if new_date == "":
         new_date = None
     if new_link == "":
         new_link = None
+    if new_tag =="":
+        new_tag = None
+    path = ""
     for x in c[empireName].find({'date':old_date}):
         path = str(x['image'])
-    if new_date is None and new_link is None:
-        return       
-    elif new_date is None:
-        print "here"
+    if not new_date is None:
+        c[empireName].update({'date':str(old_date)},{"$set":{'date':new_date}})       
+    if not new_link is None:
         c[empireName].update({'date':str(old_date)},{"$set":{'image':new_link}})
         if c[empireName].find({'image':path}).count() == 0:
             if os.path.isfile(path[1:]):
                 os.remove(path[1:])    
-    elif new_link is None:
-        c[empireName].update({'date':str(old_date)},{"$set":{'date':new_date}})
-    else:
-        print "here2"
-        c[empireName].update({'date':str(old_date)},{"$set":{'date':new_date,'image':new_link}})
-        if c[empireName].find({'image':path}).count() == 0:
-            if os.path.isfile(path[1:]):
-                os.remove(path[1:])   
+    if not new_tag is None:
+        c[empireName].update({'date':str(old_date)},{"$set":{'tag':new_tag}})
 #Get Maps
 #Returns an array of all the maps for an empire
 #The array is an array of dictionaries where the dictionary has all the dates as keys and corresponding map links as entries
@@ -95,12 +96,13 @@ def getMaps(empireName):
     c = connection['data3']
     empName = empireName
     #Get Everything and put it in a dictionary
-    d = {}
     array = []
+    
     for x in c[empName].find():
-        d[str(x['date'])] = str(x['image'])
-        array.append(d)
         d = {}
+        for key in x:
+            d[str(key)] = str(x[key])
+        array.append(d)
     return array
 
 def rmvMap(empire, date):
@@ -109,12 +111,8 @@ def rmvMap(empire, date):
     for x in c[empire].find({'date':date}):
         path = str(x['image'])
     c[empire].delete_one({'date':date})
-    print path[1:]
-    print c[empire].find({'image':path}).count()
     if c[empire].find({'image':path}).count() == 0:
-        print "BOOOO"
         if os.path.isfile(path[1:]):
-            print "YAAAY"
             os.remove(path[1:])
 
 #For hiding the password

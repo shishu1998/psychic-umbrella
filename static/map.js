@@ -1,9 +1,9 @@
 var slidenum = 0;
 var slider = document.getElementById("slider");
 var label = document.getElementById("dateLabel");
-var dateArray = dates.split(" ");
-var mapArray = maps.split(" ");
-var tagArray = tags.split(" ");
+var dateArray = dates
+var mapArray = maps
+var tagArray = tags
 var map = document.getElementById("map");
 var timeline = [];
 var transitioning = false;
@@ -11,9 +11,10 @@ var button = document.getElementById("transition");
 var slideshow;
 var title = document.getElementById("title");
 
-function struct(date,map){
+function struct(date,map,tag){
     this.date = date;
     this.map = map;
+    this.tag = tag;
 }
 
 function sortDate(a,b){
@@ -21,6 +22,7 @@ function sortDate(a,b){
 }
 var update = function(slide){
     //
+
     if(dateArray.length == 0){
 	return;
     }
@@ -34,10 +36,10 @@ var update = function(slide){
 	    label.innerHTML = "Input error, the date you put in was not a date";
 	}
 	else if(timeline[slidenum].date > 0){
-	    label.innerHTML = timeline[slidenum].date + " C.E.";
+	    label.innerHTML = timeline[slidenum].date + " C.E. - " + timeline[slidenum].tag;
 	}
 	else{
-	    label.innerHTML = timeline[slidenum].date * -1 + " B.C.E.";
+	    label.innerHTML = timeline[slidenum].date * -1 + " B.C.E. - " + timeline[slidenum].tag;
 	}
     }
 };
@@ -57,11 +59,11 @@ var transition = function(){
 //console.log(maps);
 
 window.addEventListener("load",function(){
-    dateArray.pop();
     var i;
     for(i = 0; i < dateArray.length; i ++){
+        //console.log(dateArray[i])
 	dateArray[i] = parseInt(dateArray[i]);
-	timeline.push(new struct(dateArray[i],mapArray[i]));
+	timeline.push(new struct(dateArray[i],mapArray[i],tagArray[i]));
     }
     timeline.sort(sortDate);
     slider.max = dateArray.length-1;

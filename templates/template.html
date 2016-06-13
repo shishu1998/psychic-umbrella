@@ -3,6 +3,8 @@
   <head>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
     {%block head%}{%endblock%}
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script> var empires = {{Emps|safe}}</script>
   </head>
   <body>
     <div class="nav">
@@ -25,9 +27,13 @@
   <a href="/archive">Archive</a>
       </li>
       {%endif%}
+      <li>
+  <a id="empires">Empires</a>
     </ul>
     </div>
+    <div id="popup" align="center"></div>
     {%block body%}{%endblock%}
+    <script type="text/javascript" src="/static/template.js"></script>
   </body>
   
     

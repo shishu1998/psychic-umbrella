@@ -20,7 +20,7 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 #container {
-    width:350px;
+    width:400px;
     position:fixed;
     right: 0;
     left: 0px;
@@ -30,6 +30,7 @@ input[type="range"]::-webkit-slider-thumb{
     margin-bottom: auto;
     margin-top: auto;
     text-align: center;
+    z-index:-1;
 }
 
 p{

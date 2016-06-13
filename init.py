@@ -27,8 +27,7 @@ def verify():
 @app.route("/", methods = ['GET','POST'])
 @app.route("/index", methods = ['GET', 'POST'])
 def index():
-    Conts = database.getEmpires()
-    return render_template("index.html", Conts=Conts, logged = verify())
+    return redirect(url_for("map",empire="World"))
 
 @app.route("/login", methods=['GET','POST'])
 def login():
@@ -42,6 +41,7 @@ def login():
             return redirect(url_for('index'))
         else:
             return render_template('login.html',logged = False, err="Incorrect Password")
+
 @app.route('/change', methods = ['GET', 'POST'])
 def change():
     if verify():
@@ -55,6 +55,7 @@ def change():
             return render_template('change.html', logged = verify())
     else:
         return render_template('change.html',logged=verify())
+
 @app.route('/logout')
 def logout():
     if verify():
@@ -74,7 +75,7 @@ def archive():
 @app.route("/<empire>/archive")
 def archive2(empire=''):
     Maps = database.getMaps(empire)
-    return render_template("archive.html", emp = empire, Maps = Maps, data = "maps", logged = verify())
+    return render_template("archive.html", emp = empire, Emps = database.getEmpires(), Maps = Maps, data = "maps", logged = verify())
 
 #Adding an empire
 @app.route("/addEmpire", methods =['GET','POST'])
@@ -90,18 +91,18 @@ def add():
             return redirect(url_for("add"))
         if (RepresentsInt(form['start']) and RepresentsInt(form['end'])):
             if (form['start'] == form['end']):
-                database.addMap(empire,form['start'],form['desc'],path)
+                database.addMap(empire,form['start'],path,form['tag'])
             else:
-                database.addMap(empire,form['start'],form['desc'],path)
-                database.addMap(empire,form['end'],form['desc'],path)
+                database.addMap(empire,form['start'],path,form['tag'])
+                database.addMap(empire,form['end'],path,form['tag'])
         elif (RepresentsInt(form['start'])):
-            database.addMap(empire,form['start'],form['desc'],path)
+            database.addMap(empire,form['start'],path,form['tag'])
         elif (RepresentsInt(form['end'])):
-            database.addMap(empire,form['end'],form['desc'],path)
+            database.addMap(empire,form['end'],path,form['tag'])
 
         return redirect(url_for("index"))
     else:
-         return render_template("data.html", data = "empires", logged = verify())
+         return render_template("data.html", data = "empires", Emps = database.getEmpires(),logged = verify())
 
 #Removing an empire
 @app.route("/removeEmpire/<emp>")
@@ -113,16 +114,16 @@ def removeEmpire(emp=''):
 def map(empire=''):
     maps = database.getMaps(empire)
     if not maps is None:
-        links = ''
-        dates = ''
-        tags = ''
-        for ind in range(0,len(maps)):
-            #links += maps[ind].values()[0] + ' '
-            #dates += maps[ind].keys()[0] + ' '
-            links += maps[ind][0] + ' '
-            tags += maps[ind][1] + ' '
-            dates+= ind + ' '
-    return render_template("map.html", link=links, date=dates, tag=tags,empire=empire, logged = verify())
+        links = []
+        dates = []
+        tags = []
+        print maps
+        for x in maps:
+            print x
+            dates.append(x['date'])
+            links.append(x['image'])
+            tags.append(x['tag'])
+    return render_template("map.html", link=links, date=dates,Emps=database.getEmpires(), tag=tags,empire=empire, logged = verify())
 
 #Adding a map to an empire
 @app.route("/addMap/<empire>", methods =['GET','POST'])
@@ -135,13 +136,13 @@ def addMap(empire=''):
         if(path is None):
             return redirect(url_for("addMap", empire=empire))
         if (form['start'] == form['end']):
-            database.addMap(empire,form['start'],path)
+            database.addMap(empire,form['start'],path,form['tag'])
         else:
-            database.addMap(empire,form['start'],path)
-            database.addMap(empire,form['end'],path)
+            database.addMap(empire,form['start'],path,form['tag'])
+            database.addMap(empire,form['end'],path,form['tag'])
         return redirect(url_for("archive2", empire=empire))
     else:
-        return render_template("data.html", data = "maps", logged = verify())
+        return render_template("data.html", data = "maps",Emps=database.getEmpires(), logged = verify())
 
 #Removing a map from an empire
 @app.route("/removeMap/<empire>/<date>", methods=['GET','POST'])
@@ -162,14 +163,10 @@ def editMap(empire = '', date = ''):
     if request.method == "POST":
         form = request.form
         path = upload_file()
-        if(path is None or path == "/"):
-            path = form['link']
-        if(path is None):
-            return redirect(url_for("editMap",empire=empire,date=date))
-        database.updateMap(empire,date,form['newDate'],path)
+        database.updateMap(empire,date,form['newDate'],path,form['newTag'])
         return redirect(url_for("map", empire=empire))
     else:
-        return render_template("data.html", data = "date", logged=verify())
+        return render_template("data.html", data = "date", Emps = database.getEmpires(),logged=verify())
 
 def allowed_file(filename):
     return '.' in filename and \

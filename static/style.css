@@ -76,3 +76,49 @@ div{
 p{
     color:#176258;
 }
+#popup{
+    z-index:1;
+    pointer-events:none;
+    margin-left: 10%;
+    width: 50%;
+    height: 35%;
+    position: fixed;
+    top: 30%;
+    overflow: auto;
+}
+.empSelect{
+    pointer-events:auto;
+    height: 20px;
+    width: 95%;
+    padding-left: 3px;
+    border-style: solid;
+    background-color: gray;
+    text-align: left;
+    opacity: 0.8;
+}
+.empSelect:hover{
+    opacity: 1.0;
+}
+.empReturn{
+    pointer-events:auto;
+    height: 30px;
+    width: 95%;
+    padding-left: 3px;
+    border-style:solid;
+    bottom:5px;
+    background-color:blue;
+    padding-top:8px;
+}
+.empReturn:hover{
+    background-color:cyan;
+}
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    pointer-events:none;
+}
