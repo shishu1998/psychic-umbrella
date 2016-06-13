@@ -117,9 +117,7 @@ def map(empire=''):
         links = []
         dates = []
         tags = []
-        print maps
         for x in maps:
-            print x
             dates.append(x['date'])
             links.append(x['image'])
             tags.append(x['tag'])
