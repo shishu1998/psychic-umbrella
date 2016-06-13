@@ -3,6 +3,7 @@ var slider = document.getElementById("slider");
 var label = document.getElementById("dateLabel");
 var dateArray = dates.split(" ");
 var mapArray = maps.split(" ");
+var tagArray = tags.split(" ");
 var map = document.getElementById("map");
 var timeline = [];
 var transitioning = false;

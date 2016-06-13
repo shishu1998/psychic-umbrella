@@ -115,10 +115,14 @@ def map(empire=''):
     if not maps is None:
         links = ''
         dates = ''
+        tags = ''
         for ind in range(0,len(maps)):
-            links += maps[ind].values()[0] + ' '
-            dates += maps[ind].keys()[0] + ' '
-    return render_template("map.html", link=links, date=dates, empire=empire, logged = verify())
+            #links += maps[ind].values()[0] + ' '
+            #dates += maps[ind].keys()[0] + ' '
+            links += maps[ind][0] + ' '
+            tags += maps[ind][1] + ' '
+            dates+= ind + ' '
+    return render_template("map.html", link=links, date=dates, tag=tags,empire=empire, logged = verify())
 
 #Adding a map to an empire
 @app.route("/addMap/<empire>", methods =['GET','POST'])
