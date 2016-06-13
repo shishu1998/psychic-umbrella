@@ -103,9 +103,26 @@ button.addEventListener("click",function(){
 	    }
 	    slider.value = slidenum;
 	    update(slidenum);
+            speeds = document.getElementsByName("speed");
+    console.log(speeds);
+    for(var i = 0; i < speeds.length; i++){
+        if(speeds[i].checked){
+            clearInterval(slideshow);
+            slideshow=setInterval(changeMap,1000*speeds[i].value);
+            console.log(speeds[i].value);
+        }
+    }
 	}
     }
-    slideshow = setInterval(changeMap,5000);
+    speeds = document.getElementsByName("speed");
+    console.log(speeds);
+    for(var i = 0; i < speeds.length; i++){
+        if(speeds[i].checked){
+            clearInterval(slideshow);
+            slideshow=setInterval(changeMap,1000*speeds[i].value);
+            console.log(speeds[i].value);
+        }
+    }
 });
 
 window.addEventListener("keydown",function(e){
