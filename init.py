@@ -90,14 +90,14 @@ def add():
             return redirect(url_for("add"))
         if (RepresentsInt(form['start']) and RepresentsInt(form['end'])):
             if (form['start'] == form['end']):
-                database.addMap(empire,form['start'],path)
+                database.addMap(empire,form['start'],form['desc'],path)
             else:
-                database.addMap(empire,form['start'],path)
-                database.addMap(empire,form['end'],path)
+                database.addMap(empire,form['start'],form['desc'],path)
+                database.addMap(empire,form['end'],form['desc'],path)
         elif (RepresentsInt(form['start'])):
-            database.addMap(empire,form['start'],path)
+            database.addMap(empire,form['start'],form['desc'],path)
         elif (RepresentsInt(form['end'])):
-            database.addMap(empire,form['end'],path)
+            database.addMap(empire,form['end'],form['desc'],path)
 
         return redirect(url_for("index"))
     else:
