@@ -137,7 +137,9 @@ def authenticate(password):
         return True
     return False
 
-def update(old,new):
+def update(old,new, new2):
+    if not new = new2:
+        return False
     if authenticate(old):
         connection = MongoClient()
         c = connection['data3']

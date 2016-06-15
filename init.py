@@ -47,7 +47,7 @@ def change():
     if verify():
         if request.method == 'POST':
             form = request.form
-            if database.update(form['old'],form['new']):
+            if database.update(form['old'],form['new'], form['new2']):
                 return redirect(url_for('index'))
             else:
                 return render_template('change.html', logged = verify(), wrong = "yes", err = "Incorrect Password")
