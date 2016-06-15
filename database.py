@@ -78,15 +78,16 @@ def updateMap(empireName,old_date,new_date=None,new_link=None,new_tag=None):
     path = ""
     for x in c[empireName].find({'date':old_date}):
         path = str(x['image'])
-    if not new_date is None:
-        c[empireName].update({'date':str(old_date)},{"$set":{'date':new_date}})       
+        
     if not new_link is None:
         c[empireName].update({'date':str(old_date)},{"$set":{'image':new_link}})
         if c[empireName].find({'image':path}).count() == 0:
             if os.path.isfile(path[1:]):
-                os.remove(path[1:])    
+                os.remove(path[1:])
     if not new_tag is None:
         c[empireName].update({'date':str(old_date)},{"$set":{'tag':new_tag}})
+    if not new_date is None:
+        c[empireName].update({'date':str(old_date)},{"$set":{'date':new_date}})
 #Get Maps
 #Returns an array of all the maps for an empire
 #The array is an array of dictionaries where the dictionary has all the dates as keys and corresponding map links as entries
