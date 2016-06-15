@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 #max size of 16 MB
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-app.secret_key = os.urandom(24)
+app.secret_key = """\xf1\xa4;\x17g\x7f"\x9a;\xb1\x96\x0e\x97f7\xb1\xd5#)\x85\xf4\x958\x1a"""
 #Home Page
 #Gets Empires from MongoDB Database and sets Conts variable in index.html to
 #a dictionary in the format {<Continent>:<Empire>}

@@ -8,7 +8,7 @@ import os
 #Hidden Password
 random ="User"
 
-
+UPLOAD_FOLDER = os.path.dirname(__file__)
 #Add Empire
 def addEmpire(empireName):
     connection = MongoClient()
@@ -31,8 +31,8 @@ def rmvEmpire(empireName):
     connection = MongoClient()
     c = connection['data3']
     for x in c[empireName].find():
-        if os.path.isfile(str(x['image'])):
-            os.remove(str(x['image']))
+        if os.path.isfile(UPLOAD_FOLDER+str(x['image'][1:])):
+            os.remove(UPLOAD_FOLDER+str(x['image'][1:]))
     c[empireName].drop()
     c.empires.delete_one({'empire-name':empireName})
 
@@ -82,8 +82,8 @@ def updateMap(empireName,old_date,new_date=None,new_link=None,new_tag=None):
     if not new_link is None:
         c[empireName].update({'date':str(old_date)},{"$set":{'image':new_link}})
         if c[empireName].find({'image':path}).count() == 0:
-            if os.path.isfile(path):
-                os.remove(path)
+            if os.path.isfile(UPLOAD_FOLDER+path[1:]):
+                os.remove(UPLOAD_FOLDER+path[1:])
     if not new_tag is None:
         c[empireName].update({'date':str(old_date)},{"$set":{'tag':new_tag}})
     if not new_date is None:
@@ -113,8 +113,8 @@ def rmvMap(empire, date):
         path = str(x['image'])
     c[empire].delete_one({'date':date})
     if c[empire].find({'image':path}).count() == 0:
-        if os.path.isfile(path):
-            os.remove(path)
+        if os.path.isfile(UPLOAD_FOLDER+path[1:]):
+            os.remove(UPLOAD_FOLDER+path[1:])
 
 #For hiding the password
 def regPass(password):

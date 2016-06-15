@@ -104,23 +104,23 @@ button.addEventListener("click",function(){
 	    slider.value = slidenum;
 	    update(slidenum);
             speeds = document.getElementsByName("speed");
-    console.log(speeds);
+    //console.log(speeds);
     for(var i = 0; i < speeds.length; i++){
         if(speeds[i].checked){
             clearInterval(slideshow);
             slideshow=setInterval(changeMap,1000*speeds[i].value);
-            console.log(speeds[i].value);
+            //console.log(speeds[i].value);
         }
     }
 	}
     }
     speeds = document.getElementsByName("speed");
-    console.log(speeds);
+    //console.log(speeds);
     for(var i = 0; i < speeds.length; i++){
         if(speeds[i].checked){
             clearInterval(slideshow);
             slideshow=setInterval(changeMap,1000*speeds[i].value);
-            console.log(speeds[i].value);
+            //console.log(speeds[i].value);
         }
     }
 });
