@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import database
 
-UPLOAD_FOLDER = os.path.dirname(__file__) + 'static/images/'
+UPLOAD_FOLDER = os.path.dirname(__file__) + '/static/images/'
 ALLOWED_EXTENSIONS = set(['PNG', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -181,11 +181,11 @@ def upload_file():
         return None
     filepath = os.path.dirname(__file__) + "static/images/" + file.filename
     if os.path.isfile(filepath):
-        return "/"+filepath
+        return url_for("static",filename= "images/"+file.filename)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return "/" + filepath
+        return url_for("static",filename="images/"+filename)
     return None
     
 @app.route('/uploads/<filename>')
