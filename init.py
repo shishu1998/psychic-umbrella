@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import database
 
-UPLOAD_FOLDER = os.path.dirname(__file__) + '/static/images/'
+UPLOAD_FOLDER = os.path.dirname(__file__) + 'static/images/'
 ALLOWED_EXTENSIONS = set(['PNG', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
