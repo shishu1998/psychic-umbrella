@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import database
 
-UPLOAD_FOLDER = os.path.dirname(__file__) + 'static/images/'
+UPLOAD_FOLDER = os.path.dirname(__file__) + '/static/images/'
 ALLOWED_EXTENSIONS = set(['PNG', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -18,11 +18,7 @@ app.secret_key = os.urandom(24)
 #Renders index.html
 
 def verify():
-    if 'log' in session:
-        return session['log'] == 'verified'
-    else:
-        session['log'] = 'unverified'
-        return False
+    return 'log' in session
     
 @app.route("/", methods = ['GET','POST'])
 @app.route("/index", methods = ['GET', 'POST'])
@@ -59,8 +55,7 @@ def change():
 @app.route('/logout')
 def logout():
     if verify():
-        session['log'] = "unverified"
-    session['action'] = "Logged Out"
+        session.clear()
     return redirect(url_for('index'))
         
 #Archive Page
