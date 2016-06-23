@@ -32,16 +32,22 @@ var update = function(slide){
     else{
 	slidenum = slide;
 	map.src = timeline[slidenum].map;
+
 	if(isNaN(timeline[slidenum].date)){
 	    label.innerHTML = "Input error, the date you put in was not a date";
 	}
 	else if(timeline[slidenum].date > 0){
-	    label.innerHTML = timeline[slidenum].date + " C.E. - " + timeline[slidenum].tag;
+	    label.innerHTML = timeline[slidenum].date + " C.E." 
+        if(isNaN(timeline[slidenum].tag))
+            label.innerHTML += "- " + timeline[slidenum].tag;
 	}
 	else{
-	    label.innerHTML = timeline[slidenum].date * -1 + " B.C.E. - " + timeline[slidenum].tag;
+	    label.innerHTML = timeline[slidenum].date * -1 + " B.C.E." + timeline[slidenum].tag;
+        if(isNaN(timeline[slidenum].tag))
+            label.innerHTML += "- " + timeline[slidenum].tag;
 	}
     }
+
 };
 
 var transition = function(){

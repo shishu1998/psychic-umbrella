@@ -1,5 +1,5 @@
 input[type=range]{
-    width:100%;
+    width:80%;
     margin:8px 0 8px 0;
 }
 
@@ -20,10 +20,11 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 #container {
-    width:40%;
-    position:fixed;
+    width: 1000px;
+    height: 100%;
+    position: absolute;
     right: 0;
-    left: 0px;
+    left: 225px;
     margin-right: auto;
     margin-left: auto;
     top: 10px;
@@ -31,6 +32,10 @@ input[type="range"]::-webkit-slider-thumb{
     margin-top: auto;
     text-align: center;
     z-index:-1;
+}
+
+img {
+    max-width: 100%;
 }
 
 p{

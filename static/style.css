@@ -120,3 +120,8 @@ p{
     cursor: default;
     pointer-events:none;
 }
+
+#pic{
+    width: 600px;
+    height: auto;
+}
