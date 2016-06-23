@@ -38,13 +38,15 @@ var update = function(slide){
 	}
 	else if(timeline[slidenum].date > 0){
 	    label.innerHTML = timeline[slidenum].date + " C.E." 
-        if(isNaN(timeline[slidenum].tag))
-            label.innerHTML += "- " + timeline[slidenum].tag;
+        
+        if(timeline[slidenum].tag!="")
+            label.innerHTML += " - " + timeline[slidenum].tag;
 	}
 	else{
 	    label.innerHTML = timeline[slidenum].date * -1 + " B.C.E." + timeline[slidenum].tag;
-        if(isNaN(timeline[slidenum].tag))
-            label.innerHTML += "- " + timeline[slidenum].tag;
+        
+        if(timeline[slidenum].tag!="")
+            label.innerHTML += " - " + timeline[slidenum].tag;
 	}
     }
 
